@@ -1,0 +1,74 @@
+#!/bin/sh
+
+NEWSBIN=/var/lib/newsbin; export NEWSBIN
+shift
+DATE_STAMP="`date +%y%m%d%H%M%S`"
+
+TMPFILE=$TMP/pa.$DATE_STAMP.$$
+
+if [ $PGP = "none" ]; then
+  PMAPP_PROG=cat
+else
+  PMAPP_PROG="PMAPP $NEWSGROUP"
+fi
+
+echo Action: processApproved 1>&2
+
+cat > $TMPFILE
+
+save() { 
+
+  ( 
+    cat $TMPFILE
+  ) | procmail -f- $MNG_ROOT/etc/procmail/save-approved
+}
+
+post() {
+  FAILED=$TMP/failed.$$
+  (
+    echo Path: "$PATH_SUFFIX"
+
+    cat $MNG_ROOT/etc/added-headers | grep ': ' 
+    # I do grep above because a lot of users inserts empty
+    # lines in the added headers.
+
+    echo Date: `date "+%a, %e %b %Y %H:%M:%S CST"`
+    cat $TMPFILE					\
+      | formail -f -a "Newsgroups: $NEWSGROUP"		\
+	    -I Path:					\
+            -I X-Moderate-For:                          \
+            -I Return-Path:                             \
+            -I X-Mailer:                                \
+	    -I "Date:"                                  \
+            -I "X-400-Received:"                        \
+	    -I Received: -I "From " 			\
+	    -a "Approved: $PMUSER_APPROVAL"		\
+            -I Lines:                                   \
+            -I Cc:                                      \
+	    -I To: -I Status:
+
+    if [ -f $MNG_ROOT/etc/added-footer ] ; then
+      cat $MNG_ROOT/etc/added-footer
+    fi
+
+  )                                                     \
+    | $PMAPP_PROG					\
+    | tee $FAILED                                       \
+    | $RNEWS
+  if [ "$?" = "0" ] ; then
+    /bin/rm $FAILED
+  else
+    echo IHAVE failed. Look at $FAILED. 1>&2
+  fi
+}
+
+PMUSER="$PMUSER_APPROVAL"; export PMUSER
+ROBOMOD="$ROBOMOD_APPROVAL"; export ROBOMOD
+save
+post
+
+if needAck < $TMPFILE; then
+  modack.approved $TMPFILE
+fi
+
+rm $TMPFILE
