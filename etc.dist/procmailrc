@@ -104,7 +104,7 @@ $MAILDIR/bomb
 
 :0
 * ^TOscrm-approved
-| modenv stump.pl acceptFromMod.pl
+| formail -c | modenv stump.pl acceptFromMod.pl
 
 :0
 * ^TOscrm-rejected
