@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd $MNG_ROOT/tmp
+
+for i in failed*; do 
+  if $RNEWS < $i; then
+    /bin/rm $i
+  fi
+done
