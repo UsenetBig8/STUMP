@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ "$PGP" = "none" ] ; then
+  cat
+else 
+  if [ "x$PGP" = "x" ] ; then
+    if which pgp ; then
+      pgp $@
+    else
+      cat $@
+      echo used cat because pgp was not found 1>&2
+    fi
+  else
+    if [ -x $PGP ] ; then
+      $PGP $@
+    else
+      echo Please define variable PGP in your admin/etc/modenv file 1>&2
+      pgp $@
+    fi
+  fi
+fi
