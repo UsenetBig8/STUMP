@@ -1,0 +1,5 @@
+#!/bin/sh
+
+PUBRING=$MNG_ROOT/data/pubring.pgp
+
+pgp -kaf +pubring=$PUBRING
