@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "x$@" = "x" ]; then
+
+  cat >> $MNG_ROOT/data/noack.list
+
+else
+
+  echo $@ >> $MNG_ROOT/data/noack.list
+
+fi
