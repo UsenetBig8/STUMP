@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# This is a shell script that replaces "hostname" on bsd-derived systems
+# where inews conflicts with system-provided "hostname" program.
+#
+# This is a drop-in replacement for hostname.
+#
+# Edit this file and set HOSTNAME and FULL_HOSTNAME to the right values,
+# according to your machine's system name.
+#
+# Read instructions in "modenv" file (close to RNEWS) where I explain when
+# you should use this script, and how.
+#
+# Example: 
+# HOSTNAME=galaxy
+# FULL_HOSTNAME=galaxy.galstar.com
+
+HOSTNAME=manifold
+FULL_HOSTNAME=manifold.algebra.com
+
+if [ "x$1" = "-f" ] ; then
+  echo $HOSTNAME
+else
+  echo $FULL_HOSTNAME
+fi
