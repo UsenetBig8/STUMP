@@ -24,7 +24,13 @@
 #
 # EMPTY LINES ARE NOT ALLOWED!!!
 #
-ichudov@algebra.com           		1	
-vladimir@chinook.physics.utoronto.ca 	0       NO_ADVICE_LIST
-ss@ee.port.ac.uk                        0       NO_ADVICE_LIST
-scrmod@iris.mipt.ru			0	NO_ADVICE_LIST
+# NOTE: the first line here means that my free WebSTUMP is used
+# for moderation. To activate your webstump account (this is
+# all free), please write to ichudov@algebra.com and tell me
+# your newsgroup name and approval address (such as 
+# csfm-approved@your.site.com).
+#
+# IF you are using webstump, all other moderators mentioned here should
+# have the active flag set to 0, NOT to 1.
+#
+freewebstump@freewebstump.algebra.com	1	NO_BOARD_LIST,NO_ADVICE_LIST
