@@ -1,0 +1,22 @@
+#!/bin/sh
+
+(
+  cat $@ | formail -rt -I "Reply-To: $NOACK"
+  cat <<_EOB_
+Hello,
+
+$EXPLANATION
+
+This is an automatic acknowledgment that your message has been APPROVED
+for posting to moderated newsgroup $NEWSGROUP. 
+
+Look for the charter of $NEWSGROUP at 
+
+	http://www.algebra.com/~ichudov/usenet/scrm/index.html
+
+If you do not want to receive automatic acknowledgments in the future,
+simply reply to this message, QUOTING ITS TEXT IN FULL.
+
+_EOB_
+  cat $@
+) | sendmail -t -f $MUNGED_ADDRESS
