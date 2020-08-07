@@ -1,0 +1,406 @@
+                ``Making Moderation Easy''
+
+This document describes how I think about newsgroup moderation, as
+well as lists software options for potential and current newsgroup
+moderators. It is available at 
+
+        http://www.algebra.com/~ichudov/stump/faq.txt
+
+Contents:
+
+Q: What is moderation and moderated newsgroups?
+Q: What moderation is about?
+Q: What personal qualities are required from moderators?
+Q: What technical skills are required from moderators?
+Q: What about team moderation?
+Q: What risk does moderation introduce?
+Q: What moderation programs do you provide?
+Q: What do I have to know and have to use them?
+Q: What services do you provide?
+Q: Which program/service is right for me?
+Q: How can you help us with installation?
+Q: Which newsgroups use STUMP?
+Q: What other moderation programs are available?
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Q: What is moderation and moderated newsgroups?
+
+A:
+
+Moderated newsgroups are newsgroups where articles are somehow scanned
+and accepted (or rejected) based on a certain criteria specific to the
+group. Moderation is the process of scanning incoming articles and
+processing approved and rejected articles.
+
+An excellent FAQ on newsgroup moderation has been written by Denis McKeon.
+Unfortunately, it is a little dated, and at times outdated, but it gives
+an excellent overview of newsgroup moderation process. However, unless
+Denis updates it, its description of software options for moderation is
+outdated and is not to be relied upon.
+
+        http://www.swcp.com/~dmckeon/mod-faq.html
+
+Q: What moderation is about?
+
+A:
+
+        Moderation is about helping people talk to people.
+
+Unfortunately, in some cases many participants of online discussions
+feel that, unless articles are somehow filtered, their topic cannot be
+discussed effectively. Newsgroup moderation is one of the remedies for
+such situations.
+
+Moderation is about people, not programs. In other words, any software
+that the moderator uses should have a goal of making a discussion more
+useful and enjoyable for its participants and readers, and save time for
+posters and moderators alike.
+
+Proper software can be immensely beneficial in facilitating online
+communities, but bad software can be a great impediment to them.
+
+Q: What personal qualities are required from moderators?
+
+A: My long experience with USENET, being a moderator myself, and
+communicating with my fellow moderators and users of my moderation
+programs convinced me that the most important qualities are,
+surprisingly:
+
+        o patience
+        o sense of humor
+
+Newsgroup moderation is a challenge, because a moderator has to deal with
+computer programs as well as people, and both are highly unpredictable
+and at times the solutions to problems are not immediately obvious. The
+two qualities listed above prevent moderators from making mistakes that
+are often not easily reversible.
+
+Q: What technical skills are required from moderators?
+
+A: 
+
+The short answer is none. Even an AOL user can now be an effective
+moderator. Some of my users moderate from Prodigy and are highly 
+popular in their newsgroups for the good that they do to them.
+
+The long answer is that the more technical skills you have, the more
+options and solutions for the moderation process are available.
+Knowledge of Unix and NNTP (Network News Transport Protocol) are
+valuable, although by no means necessary, skills.
+
+Q: What about team moderation?
+
+A:
+
+Generally, there are three ways to moderate a newsgroup:
+
+        1) Moderation is done solely by a computer program (bot),
+           with no human input for individual articles
+
+        2) Moderation is done by an individual human being, possibly
+           helped by a program that automatically approves/rejects
+           certain articles.
+
+        3) Moderation is done by a group of people, again possibly
+           helped by a program.
+
+There are many possible factors that influence the choices for each 
+newsgroup. However, team moderation has certain advantages over
+moderation by an individual person. 
+
+Most importantly, it ensures continuity of the newsgroup. In very 
+many cases, moderators who take on moderation all by themselves
+find other things to do with their life, or suffer from "moderator
+burnout" caused by inadequate software.
+
+Team moderation, especially for newsgroups with many postings in them,
+ensures adequate workloads for individual people. Moderators are human
+beings, they get sick, fall in love, work overtime, have kids and so
+on. In most (all I know of) cases they are unpaid. It is unfair to
+require from them to be on a 24 hour per day alert and to never take a
+vacation.
+
+Team moderation ensures that individual moderators have a life. It
+ensures that your newsgroup will be well taken care of.
+
+[Added by Baird Stafford]
+
+> Team moderation also ensures a more even flow of articles through the
+> group.  If a newsgroup has five moderators, articles will be approved
+> five times a day minimum rather than once a day minimum.  (Some
+> moderators seem to log in to the moderation site more frequently, some
+> less.)  An article will sit in queue for considerably less time, on
+> average, if more than one person is doing the work - especially if
+> they're scattered 'round the world and can monitor the group on a
+> 24-hour basis.
+
+Q: What risk does moderation introduce?
+[added by Gary Johnson]
+A:
+
+Newsgroup failure, short and long term.  Through mistake, oversight,
+complication, bad luck or intent.  Responsibilities, and headaches, that
+are distributed with normal newsgroups become focused with moderation.
+Be prepared to be diligent, underappreciated and blamed.  Especially in
+the beginning, when the problems will be new.
+
+Q: What moderation programs do you provide?
+
+A:
+
+There are two kinds of programs, all of which are free if you want to
+install them by yourself. 
+
+For those who do not want to deal with installation and maintenance, I
+provide services so that the only thing that the user is to do is
+clicking mouse buttons. (see next question).
+
+1) STUMP is a moderation bot that gives moderators a capability to
+operate in one of the three modes listed above -- fully automated, 
+single user, and team moderation. STUMP is an abbreviation for Secure 
+Team-based USENET Moderation Program. It is the most popular moderation
+bot on USENET today, and is in use by about 23 newsgroups, and counting.
+It is a sophisticated program designed specifically for newsgroups with
+medium to high posting volumes.
+
+It is described at:
+
+        http://www.algebra.com/~ichudov/stump
+
+You can download and find installation instructions and other useful
+documentation there. There is also a mailing list for STUMP users.
+
+Moderation can be done either by email or through the web (see WebSTUMP
+below). Web moderation is a lot faster and more convenient.
+
+2) WebSTUMP is a user interface for STUMP users. It allows moderators
+to do all their work from their favorite Web browser, from any place
+on the planet. It gives a shared message queue to all moderators.
+
+It is described on the STUMP Web Page.
+
+WebSTUMP is free for those who want to download and install it. I also
+rent space on my WebSTUMP installation to existing STUMP users if they
+have no Web/CGI capability.
+
+You can "test drive" WebSTUMP and look at the documentation by going to:
+
+        http://www.algebra.com/~ichudov/stump/webstump
+
+A free two months trial period is provided to any STUMP user. ReadySTUMP
+users get WebSTUMP as part of their package.
+
+Q: What services do you provide?
+
+A:
+
+First of all, my mission is to help people in various newsgroups
+communicate. Making money is a nice, but incidental, addition to that
+highly enjoyable activity. I do not want to push anyone into purchasing
+any services from me in they do not need them. I would much rather see
+a happy newsgroup that uses my (or other) moderation programs, than see
+a potentially great newsgroup fail or moderators quit. I do answer
+installation questions from my non-paying users.
+
+1) ReadySTUMP is a service where I give you an account for STUMP,
+perform all the installation, and give you access to WebSTUMP. You get
+the following:
+
+        o Ability to moderate with a team of people
+        o Mailing list for moderators
+        o WebSTUMP user interface
+        o A customized "Home Page" for your newsgroup where you can place
+          important documents such as your newsgroup charter and FAQ and
+          information about moderators
+        o Customized boilerplate messages with rejection reasons can be 
+          set up.
+
+ReadySTUMP is described in great detail at 
+
+        http://www.algebra.com/~ichudov/stump/hosting
+
+2) I rent space on WebSTUMP for those moderators who install STUMP on
+their own but cannot install WebSTUMP by themselves. A free trial period
+is provided because I am certain that WebSTUMP is the preferred user 
+interface solution.
+
+Test drive it at
+
+        http://www.algebra.com/~ichudov/stump/webstump
+
+3) For those moderators who need a simple and inexpensive solution, I
+will rent GateKeeper for them. However, it is still in development. 
+Please write to me and let me know if you have an interest in this
+service.
+
+Q: What do I have to know and have to use them?
+
+A: 
+
+   How well do you have to know Unix to install STUMP? If you can answer
+   this quiz, you are probably up to date.
+
+        o What is a .profile file?
+        o How do you rename a file?
+        o What is "make" and "Makefile"?
+        o What is "sendmail"?
+        o What is Perl?
+        o What is a .forward file?
+        o What does "tail -f" do?
+
+   What do you need to install STUMP: 
+
+        o A Unix shell account
+        o [preferably but not necessary] Ability to set up or ask your 
+          sysadmin to set up sendmail aliases
+        o perl
+        o C compiler [I do provide precompiled binaries for Linux and 
+          FreeBSD but not other OSes]
+
+   What do you need to know to install WebSTUMP?
+
+   [IMPORTANT: YOU DO NOT NEED TO KNOW ANYTHING LISTED BELOW TO _USE_ IT]
+
+        o Perl
+        o HTML
+        o The general idea of CGI
+        o Your webserver
+        o Perhaps some shell programming
+        o Security ramifications of setuid programs
+
+   What do you need to have to install WebSTUMP?
+
+        o Your own web page on a webserver
+        o Ability to install setuid cgi-bin applications
+
+Q: Which program/service is right for me?
+
+A:
+
+Below I'll try trying to summarize various categories of users and 
+options that are, in my opinion, are optimal:
+
+1. You (or a member of your moderation team) know Unix and have access 
+   to a Unix account. You do not mind instaling a modbot by yourself
+   and maintaining it. You can have sendmail aliases set up (and you
+   know what sendmail aliases are).
+
+   In this case, STUMP is the solution for you. Download it, join the
+   stump-users mailing list for advice, and go ahead.
+
+   If you have a capability/skills to install a Web page/CGI script, you
+   can use WebSTUMP for maximum speed and easiness of moderation. If you 
+   do not, you can either use email for moderation, or (for easier
+   processing) rent space on my WebSTUMP installation. I can give you a
+   free trial.
+
+2. You use STUMP, for some reason cannot install WebSTUMP, but would like
+   to use Web moderation instead of email moderation (probably to have a
+   shared queue and save time with better user interface).
+
+   In this case, look at WebSTUMP (see above), ask me for a free trial
+   and possibly decide to rent WebSTUMP.
+
+3. You are the only moderator of an existing or proposed newsgroup. You
+   would like to make your moderation as easy as possible, and do not want
+   to deal with any technical stuff. You expect to have low ot moderate
+   (< 20 messages per day) traffic.
+
+   In this case, my future program, code named Gatekeeper, may be right
+   for you. It will use WebSTUMP user interface. You can test drive it
+   now by going to 
+
+        http://www.algebra.com/~ichudov/stump/webstump
+
+   You will be able to rent Gatekeeper/WebSTUMP for a low annual fee and
+   be free of any technical worries.
+
+Q: How can you help us with installation?
+
+There is a mailing list for STUMP users. Anyone can subscribe. I do
+monitor the list and answer questions. To subscribe to it, send email
+to majordomo @ algebra.com that says "subscribe stump-users".
+
+Lately, I have received numerous requests from non-UNIX people who wanted
+me to install STUMP at their site, for a fee. (installing STUMP requires
+some knowledge of Unix).
+
+I do provide an installation service and also provide a five month
+"warranty", which means that if something breaks with your installation,
+I will be there to help.
+
+DESPITE THE EXISTENCE OF THIS COMMERCIAL SERVICE, I do answer questions
+from those who install STUMP by themselves. That's completely free as
+long as the amount of questions is reasonable.
+
+My philosophy with respect to installation services is that I can do it
+for people who cannot do it by themselves, as long as my time is 
+compensated, but I do not mind helping others.
+
+Q: Which newsgroups use STUMP?
+
+A: 
+
+The list below is probably incomplete, but to the best of my knowledge,
+it is:
+
+    soc.culture.russian.moderated (uses ReadySTUMP moderation site hosting)
+    soc.religion.paganism (uses ReadySTUMP moderation site hosting)
+    misc.invest.financial-plan (uses ReadySTUMP moderation site hosting)
+    comp.os.ms-windows.win95.moderated
+    soc.culture.african.american.moderated
+    soc.culture.galiza 
+    rec.food.cuisine.jewish
+    rec.martial-arts.moderated
+    soc.sexuality.general
+    alt.business.telemarketing
+    rec.gambling.blackjack.moderated 
+    mensa.au.announce and mensa.au.events
+    Several local WebTV newsgroups 
+    rec.bicycles.off-road 
+    alt.toys.transformers.classical.moderated 
+    rec.sports.pro-wrestling.moderated 
+    alt.sexual.abuse.recovery.moderated (uses ReadySTUMP)
+    alt.religion.wicca.moderated (uses ReadySTUMP moderation site hosting)
+    alt.music.weird 
+    rec.humor.jewish 
+    rec.autos.sport.nascar.moderated
+    soc.culture.indian.kerala.moderated
+    misc.kids.moderated
+    soc.support.aids-hiv+ (uses ReadySTUMP moderation site hosting)
+    alt.activism.eco-action
+    alt.sex.stories.gay.moderated (uses ReadySTUMP moderation site hosting)
+    soc.politics.marxism
+    alt.life.sucks.moderated
+    soc.culture.spain
+    uk.environment (?)
+    comp.emulators.announce
+    alt.astrology.moderated
+    alt.math.moderated
+    alt.binaries.celebrities.fake.moderated
+    alt.binaries.pictures.erotica.female.young.moderated
+    comp.software.year-2000.tech
+    alt.support.depression.recovery.sanctuary
+    alt.support.childfree.moderated
+
+
+Q: What other moderation programs are available?
+
+A:
+
+[THIS SECTION IS PROBABLY INCOMPLETE. I WELCOME URLs AND CORRECTIONS]
+
+Russ Allbery (rra@stanford.edu) has developed a Perl 5 module
+News::Gateway that is a library for building robomoderators. It is
+available at CPAN.
+
+Jay Denebeim developed a robomod that works without any human input.
+
+Mike Sullivan has some really interesting robomoderator for 
+soc.singles.moderated. http://www.pell.portland.or.us/~ftp/pub/automod
+
+There is a moderation program used for scj.parenting, scjp.randomizer. You
+can get information by sending the command "send randomizer" to
+faigin@shamash.org
+

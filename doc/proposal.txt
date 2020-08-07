@@ -1,0 +1,87 @@
+An example of a _FICTIONAL_, but good, proposal, for an alt.* newsgroup. 
+Short, complete, and easy.
+
+From: Mary@alabama.net (Mary Smith)
+Subject: PROPOSAL: alt.support.boredom.moderated moderated
+Organization: Igloo in North Eskimo
+Newsgroups: alt.config,alt.support.boredom,alt.life.sucks
+
+
+
+INTRODUCTION:
+
+According to the analysis of the DejaNews archive of alt.support.boredom,
+in the past year, alt.support.boredom had around 11,000 submissions. Of
+those, however, only about 40% (our estimate) were genuinely on topic
+of asb, and the rest were mostly crossposted trolls and flames, as well
+as pervasive sex spam.
+
+The community of alt.support.boredom readers feels that there is a need
+for a parallel, moderated newsgroup existing to support sufferers from
+boredom and help their recovery.
+
+ASBM will provide a well-controlled newsgroup for worldwide discussions
+about boredom through robomoderation. The main purpose of robomoderation
+will be to weed out spam and trolls. Even though moderators do have
+an option of moderating posters by hand, we shall attempt to let most
+postings from regular participants to bypass human moderation and
+associated delays by means of automatic approvals.
+
+Those believing in anarchy can stay in the unmoderated group
+alt.support.boredom, which is not going to be removed under any
+circumstances.
+
+CHARTER:
+
+This group is for supporting individuals suffering from (or enjoying)
+boredom.  Discussions of what to do, how to spice up one's life, as
+well as more minute details of lives of boredom survivors are welcome
+here. Messages that are not discussing boredom exactly, but contribute
+to community building, are also allowed.
+
+Heated discussions, to the extent that they help relieve boredom, are
+also allowed, however moderators shall try to use their best judgment
+to not let them grow into life threatening scandals.
+
+Moderators shall use a combination of robotic and human moderation
+in order to maintain ASBM. The main purpose of robomoderation is to
+speed up discussions by regulars, as well as to bring the load on human
+moderators down.
+
+Crossposting, binary postings and commercial solititations other than
+occasional forsale ads by ASBM participants, are not allowed. Advertising
+of sexual websites is strictly forbidden.
+
+Moderators may employ advanced filtering techniques to weed out spam and
+prevent attacks disrtupting the newsgroup.
+
+Messages that contain excessive HTML tags are not allowed, however as the
+Internet technology evolves, this requirement can be relaxed or changed.
+
+All rejected messages will be returned to posters with an explanation
+of the reason for rejection. Note that, due to technical limitations on
+the ability of moderation software, posters without replyable addresses
+will not be able to receive rejection notices.
+
+While posts from anonymous or despammed addresses (such as
+mary@alabama.NOSPAM.net) are allowed, forgery (posting messages purporting
+to be from a person other than the actual poster) is forbidden.
+
+By posting to or reading ASBM, you agree to indemnify and hold
+moderators harmless from any damages related to your participation in
+ASBM. Moderators do not always agree with the articles that they approve.
+
+MODERATORS:
+
+This newsgroup will be moderated by a team of moderators. Initially
+the moderators are:
+
+mary@alabama.net (Mary)
+joeblow@aol.com (Joe Blow)
+budweiser_guy@webtv.net (Da Bud Man)
+
+For your newsgroups file:
+alt.support.boredom.moderated	Community of Bored People (Moderated)
+Moderator submission address: asbm@stump.algebra.com
+Moderator contact address: asbm-board@stump.algebra.com
+

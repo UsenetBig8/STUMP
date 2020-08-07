@@ -1,0 +1,491 @@
+<HTML>
+<BODY BGCOLOR=#FFFFFF TOPMARGIN=0>
+<HEAD><TITLE> Instructions on Setup and Use of the Robomod
+</TITLE></HEAD>
+<!-- Changed by: Igor Chudov @ home, 27-Apr-1996 -->
+<!-- Changed by: Igor Chudov @ home, 27-Apr-1996 -->
+<!-- Changed by: Igor Chudov @ home, 27-Apr-1996 -->
+<H1> Instructions on Setup and Use of the Robomod </H1>
+
+<B>Attention! Before reading instructions, please read <A HREF="spec.html">
+the specification and description of how the robomoderator works.</B><P>
+
+<H2> Contents </H2>
+
+<UL>
+  <LI> <B><A HREF="#help">Where to get HELP</A></B>
+  <LI> <B><A HREF="#init">Initial Setup</A></B>
+    <UL>
+       <LI> Setting up a separate Unix account. <B>[SYSADMIN]</B>
+       <LI> Setting up sendmail aliases. <B>[SYSADMIN]</B>
+       <LI> Setting up procmail
+       <LI> Setting up PGP
+       <LI> Setting up Perl
+    </UL>
+    <P>
+
+  <LI> <B><A HREF="#start">Starting With Robomoderator</A></B>
+    <UL>
+       <LI> Unpacking Source
+       <LI> Creating <B>../etc</B> directory
+       <LI> Setting .profile for robomod support
+       <LI> Editing Data Files in <B>../data</B>
+       <LI> Creating List for reasons of Rejection and Rejection
+            Messages
+       <LI> Creating PGP keys.
+       <LI> Compiling C programs in <B>../c</B> directory
+    </UL>
+    <P>
+
+  <LI> <B><A HREF="#test">Testing Your Setup</A></B>
+    <UL>
+      <LI> Choosing a "victim" group
+      <LI> Things to Test
+      <LI> Testing individual moderators
+    </UL>
+    <P>
+
+  <LI> <B><A HREF="#maint">Maintenance of the Robomod</A></B>
+    <UL>
+      <LI> Maintaining <B>preapproved</B> list
+      <LI> Maintaining <B>blacklist</B>
+      <LI> Maintaining <B>list of people not needing acknowledgments</B>
+      <LI> <B>"Vacationing"</B> of moderators, maintenance of private
+           mailing list for moderators.
+    </UL>
+    <P>
+
+  <LI> <A HREF="usage.html#upgrade">Upgrading Version of the Robomoderator</A>
+
+</UL>
+
+<HR> 
+
+<A NAME=help><H1>Where to get HELP</H1></A>
+
+First of all, please take your time and be prepared to be patient.
+Since configurations of local systems and newsgroups are different,
+setting them up takes some time.
+
+There are two ways you can get help. The first one is free, the second
+is not.
+
+If you know something about Unix, you probably can try to go the first
+route.  If you are not a Unix person, second route may be the way to go.
+
+<UL>
+  <LI> STUMP-users mailing list.<P>
+
+     There is a mailing list for STUMP users. You can subsrcibe and ask your
+     questions there. They will likely be answered within a day or two.
+     To subscribe, send email to majordomo @ algebra.com and say in the
+     message-body "subscribe stump-users".<P>
+
+     I do monitor that list and help you get your questions answered. The
+     submission address for sending messages is stump-users @ algebra.com.
+
+  <LI> Commercial installation services.<P>
+
+     For non-Unix people, I perform a service whereby I install STUMP
+     on their system. I also provide them with a five month warranty,
+     which means that if something breaks, I will be there to help.<P>
+
+     <B>Note, however</B>, that I encourage you to take the free route
+     and do it by yourself, and am not trying to make a sale. Installing
+     STUMP is almost always a useful experience.
+</UL>
+
+<A NAME=init><H1>Initial Setup</H1></A>
+
+The steps outlined in this chapter should be done only once, when you
+start setting up the robomoderator. Suppose that you, <I>John Doe
+&lt johndoe@yoursite.com&gt</I> are the supporter of the newly created
+group <A HREF=news:comp.sys.foobars.moderated>
+comp.sys.foobars.moderated </A>, and your users like to refer to your
+group as <B>csfm</B>.<P>
+
+<H2> Setting up a separate Unix account. <B>[SYSADMIN]</B> </H2>
+
+You need a separate user ID to run your robomoderator program. There are two
+compelling reasons for that. First of all, submissions to your newsgroup 
+will arrive to the moderation address by email. It is very easy to confuse 
+submissions and personal emails. Imagine how disappointed would be your
+private correspondents if you mistakenly post their private emails!<P>
+
+Second, and more important, reason for having a separate account for 
+personal work and robomoderator is security. Internet is a wild and 
+dangerous place full of people willing to inflict serious harm on others
+just for the sheer fun of it. I have proofread and verified all moderation
+scripts for security, and built extensive protection against malicious
+attacks aiming to hack robomoderation account. However, I cannot give
+you a 100% assurance that robomoderation process is secure.<P>
+
+If you operate robomoderator from your private account and someone manages to
+hack it, all your private files will be open for prying eyes of people whom
+you do not even know. If it happens in an isolated account, the damage will 
+be much more limited.<P>
+
+All in all though, you can get along with just using your Unix account.</P>
+
+<B>Note:</B> If you do not want to deal with setting up a Unix account,
+I offer a complete moderation site hosting service called <A HREF=hosting>
+ReadySTUMP</A>.<P>
+
+If you do not have superuser privileges, you cannot set up a legitimate
+account. Please ask your system administrator to do it for you. A good
+name for such account would be comprised of first letters of your
+newsgroup name. For example, account for soc.culture.russian.moderated
+is called <CODE>scrm@algebra.com</CODE> (I am the sysadmin of algebra.com).<P>
+
+You may call the robomod's account <CODE>csfm@yoursite.com</CODE>.
+
+<H2> Setting up sendmail aliases. <B>[SYSADMIN]</B></H2>
+
+Remember that robomoderator performs several functions: <P>
+
+<UL>
+  <LI> Accepts and checks incoming submissions
+  <LI> Accepts approvals and rejections by human moderators
+  <LI> Maintains moderators' private mailing list
+  <LI> Forwards complaints of posters to all human moderators
+</UL>
+
+For each such purpose, a separate email address must be established. Note
+the distinction between an email address and a user id: several email
+addresses may correspond to one user ID. These addresses should normally be
+<I>sendmail aliases</I>. These aliases are [normally] defined in file 
+<CODE>/etc/aliases</CODE>. You should ask your systems adminiastrator 
+to establish these aliases for your group. Below is the example of the 
+part of aliases file for Comp.Sys.FooBars.Moderated. <P>
+
+<LISTING>
+
+###################################################################### CSFM
+# Comp.Sys.FooBars.Moderated Aliases #
+######################################
+#
+# submissions
+csfm-submit:  csfm
+
+# To me, technical problems
+csfm-admin:	johndoe
+
+# Moderators' list
+csfm-mods:	csfm
+
+# Non-technical complaints, same as "board" above
+csfm-board:	csfm-mods
+
+# Mail errors, go to hell
+csfm-errors:	/dev/null
+
+# Approved and rejected messages
+csfm-approved:	csfm
+
+# Approval key autoreply Bot
+csfm-approval-key: csfm
+
+# for posters who do not want autoacknowledgments:
+csfm-noack: csfm
+
+# alternative names, for absent-minded posters
+comp-sys-foobars-moderated: csfm-submit
+comp.sys.foobars.moderated: csfm-submit
+
+</LISTING>
+
+As you can easily see, messages to all of these addresses go to the 
+robomoderator's address.<P>
+
+Note also, that if you have only one address and a sendmail-based
+system, and a non-cooperative sysadmin, you can try to get around
+the requirement to have several sendmail aliases. If addresses like
+yourname+comment@yoursite.com work, then you can use addresses like
+"csfm+approved@yoursite.com" instead.  Make sure that they do in fact
+work (it is not guaranteed) and then edit your stump/etc/procmailrc
+accordingly.<P>
+
+
+<H2> Setting up procmail </H2>
+
+You should set up <B>procmail</B> - an excellent, free third-party tool 
+for flexible processing of incoming email messages. It works on any Unix.
+You can download it from 
+<A HREF="ftp://ftp.informatik.rwth-aachen.de/pub/packages/procmail">
+   ftp://ftp.informatik.rwth-aachen.de/pub/packages/procmail
+</A>. Also, you can follow 
+<A HREF="http://www.ii.com/internet/robots/"> this link </A>
+for an excellent introduction (and more!) to procmail.<P>
+
+Procmail binary is provided for Linux and FreeBSD, see the main STUMP
+page for the reference.<P>
+
+Look at the <A HREF=procmailrc.txt>sample .procmailrc file</A> that is
+used by soc.culture.russian.moderated.<P>
+
+<H2> Setting up PGP </H2>
+
+NOTE: Not all moderators need to set up PGP. You only need PGP
+if you plan to use PGP Moose for authentication of approvals.
+Skip the rest of this section if you are not interested. You can 
+always return to it later. Make sure that the settings in the
+<A HREF=modenv.txt>stump/etc/modenv</A> file are correct. If
+you plan to NOT use PGP, keep PGP set to "none" in the "stump/etc/modenv"
+file.<P>
+
+Set up and familiarize yourself with PGP, an excellent 
+third-party encryption and authentification program. <P>
+
+Download it from <A HREF="http://web.mit.edu/network/pgp.html">this
+link</A>. If you are not residing in the US or cannot download PGP
+from that page, try <A HREF="ftp://ftp.csua.berkeley.edu/pub/cypherpunks">
+this link</A> and try to find PGP there.<P>
+
+Another link (in Norway) is this: <A HREF="http://www.ifi.uio.no/pgp/">
+download PGP from Net sites outside</A>.<P>
+
+PGP binary is provided for Linux and FreeBSD, see the main STUMP
+page for the reference.<P>
+
+
+<H2> Setting up Perl </H2>
+
+Most likely you already have a perl interpreter. Simply type at your 
+unix command prompt: <P>
+
+<LISTING>
+  $ perl -v
+</LISTING>
+
+If you see some meaningful output, you are fine and you have perl.
+Otherwise you need to install it. Try <A HREF="http://perl.com">this
+link</A> and follow instructions. Installing perl may be quite an effort,
+but good chances are that you do not need to do it.<P>
+
+<HR>
+<A NAME=start><H1>Starting with Robomoderator</H1></A>
+
+<H2> Unpacking Source</H2>
+
+Got to the home directory of your robomoderation account. Put there
+the <CODE>stump-....tar.gz</CODE> file that you just downloaded. Do this
+command: <P>
+
+<LISTING>
+$ whoami
+csfm
+$ cd $HOME
+$ zcat stump_2_3.tar.gz | tar xvf -
+</LISTING>
+
+This command will produce a lot of files under the <CODE> $HOME/stump</CODE>
+subdirectory. <P>
+
+<H2> Creating <B>..../etc</B> directory </H2>
+
+In the distribution that you receive, under <CODE> $HOME/stump</CODE>,
+there is directory <CODE>$HOME/stump/etc.dist</CODE>. It should be
+<B>renamed</B> to <CODE> $HOME/stump/etc</CODE>, and you should do the
+same with bin.dist, tmp.dist and data.dist directories. etc contains
+files that you need to customize. The reason for such renaming is that
+when you receive upgrades of the robomod, the upgrade does not override
+the files that you customized.<P>
+
+Go through files in etc directory, and edit them carefully.<P> Most of
+them are self explanatory. I put lots of comments in them. You should
+begin with editing the <A HREF=modenv.txt> stump/etc/modenv</A> file.<P>
+
+Create a symbolic links for procmail: <P>
+
+<LISTING>
+  $ /bin/ln -s $HOME/stump/etc/procmailrc $HOME/.procmailrc
+  mkdir $HOME/Mail      # Creates directory for mail
+  chmod 700 $HOME.Mail  # Make it safe
+</LISTING>
+
+Edit your <A HREF=procmailrc.txt>$HOME/stump/procmailrc</A> to tailor it
+to the needs of your newsgroup. Do it carefully.<P>
+
+<B>IMPORTANT:</B> Later you MUST make sure that procmail processes all
+your incoming mail correctly and that all rules are written right. For
+logs of all procmail activity you may look into $HOME/Mail/from logfile.
+You can set <CODE>VERBOSE=ON</CODE> in the <code>procmailrc</code> 
+file if you want to see detailed output.<P>
+
+NOTE: file Mail/from is an excellent source of debugging information.<P>
+
+<H2> Editing Data Files in <B>..../data</B> </H2>
+
+Rename <CODE>data.dist</CODE> to <CODE>data</CODE>.<P>
+
+You can (and should) edit some of the files in the data directory.
+These files are good.guys.list, bad.guys.list, bad.words.list. They
+contain Perl's regular expressions for detecting messages from preapproved 
+and blacklisted posters, and suspicious words, respectively.<P>
+
+Edit them and leave them blank (no spaces).<P>
+
+<H2> Setting .profile for robomod support </H2>
+
+It is <B>very important</B> that you source <CODE>modenv</CODE> file
+from the etc directory in your .profile (or .login) file. You need to
+have several environment variables, including PATH, to be set correctly
+in order to support robomod properly.<P>
+
+Put this in your .profile or .login file: 
+
+<LISTING> 
+source $HOME/stump/etc/modenv
+</LISTING>
+
+<H2>Creating ONE PAIR of PGP keys.</H2>
+
+[Skip this part if you do not plan on using PGP Moose]. <P>
+
+According to <A HREF="spec.html">the specification</A> of the robomod,
+you have to have one PGP key -  for signing approved articles with PGP
+Moose application.<P>
+
+Pick a passphrase that is not too hard to type and remember. Usage of
+these PGP keys is not a very high-security application, so you can
+select 512-bit key sizes. Save this passphrase in file
+<CODE>$HOME/.pgp-passphrase</CODE><P>. Make sure that this passphrase is
+not readable by anyone except the robomod user.<P>
+
+Name the key by analogy with the key used for SCRM (see modenv file
+and user names there). Your PGP Key must be named like this:<P>
+
+<PRE>
+pub   512/ABB554F5 1996/02/26 CSFM Approval Key &lt;csfm-approval-key@yoursite.com&gt;
+</PRE><P>
+
+PGP Keys are generated using command
+
+<LISTING>
+    pgp -kg -u "CSFM Approval Key &lt;csfm-approval-key@yoursite.com&gt"
+</LISTING>
+
+</TABLE>
+
+Copy your keyring to a specially designated place for STUMP:
+
+<LISTING>
+  cp $HOME/.pgp/pubring.pgp $HOME/stump/data/pubring.pgp
+</LISTING>
+
+<P>
+
+<H2> Compiling C programs in <B>stump/c</B> directory</H2>
+
+Go to the c directory and type ./compile. That should do it. If it does
+not, figure out on your own. The programs are extremely simple. Perhaps
+you can change the setting of CC to gcc, especially if you use Sun
+computers.<P>
+
+<H2>Creating List for reasons of Rejection and Rejection Messages</H2>
+
+You should think what broad categories for reasons of rejection you
+will have in your group. Give them simple names. Edit file
+<CODE>etc/reject</CODE> and edit part that consists of calls to
+subroutine <CODE>addReason</CODE>. Customize it to your taste. After
+that, go to directory <CODE>etc/messages</CODE> and make sure that
+files there have exactly the names that you listed as first parameters
+in calls to <CODE>addReason</CODE>. Make sure they have comprehensive
+and polite messages corresponding to the broad reasons for rejection
+that you made up.<P>
+
+These messages will be sent to users when their articles are rejected
+for specified reasons. The messages that I supplied are not bad.</P>
+
+Make sure that you keep the following files:
+<UL>
+  <LI>abuse -- to send back when rejecting banned users
+  <LI>crosspost -- to send back when rejecting for megacrossposting
+  <LI>charter -- to send back when rejecting for violating
+      requirements of the charter that are checked automatically
+  <LI>signature -- to send back when rejecting for bogus PGP signature.
+</UL>
+
+Edit file <CODE>rejection-reasons.lst</CODE> and put there the
+reasons that your moderators are allowed to choose for rejections.
+They should have names corresponding to the filenames in etc/messages,
+separated from comments by double colon ::.<P>
+
+Example:<P>
+
+<PRE>
+offtopic::Message is grossly off topic (spam, turks, etc)
+charter::Technical violation of charter (binary, exc. quoting)
+harassing::Message of harassing/insulting/hatemongering content
+</PRE>
+
+<HR>
+<H1> <A NAME=test>Testing Your Setup</A> </H1>
+
+First of all, your default setup uses my free WebSTUMP service,
+so that you have a Web based interface for moderation. This means
+that you install and host STUMP, and you use my installation of WebSTUMP
+to moderate articles. WebSTUMP is a web based moderation tool, which
+is nice but a pain to set up. (it requires running setuid code and
+cgi-bin capability).<P>
+
+To test your newsgroup, first write to <CODE><B>ichudov @ algebra . com
+</B></CODE>, and ask me to create a newsgroup account for you in
+webstump. Please tell me your newsgroup name and the approved address
+(such as csfm-approved@your.site.com). Free WebSTUMP is located at<P>
+
+<A HREF=http://freewebstump.algebra.com/stump-cgi/webstump.cgi>
+	http://freewebstump.algebra.com/stump-cgi/webstump.cgi
+</A><P>
+
+
+You should test your setup of the robomoderator very extensively. If
+the robomod fails when your group goes to production, you will be
+ashamed. When you are testing, look at file $HOME/Mail/from, which 
+contains all standard error output of your programs. Try to send 
+submissions by email to your moderation address. Do<P>
+
+<LISTING>
+    tail -f $HOME/Mail/from
+</LISTING>
+
+to see what's going on.
+
+<H2> Choosing a "victim" group </H2>
+
+I suggest that you use <CODE>misc.jobs.misc</CODE> for your testing.
+It is a dead newsgroup infested by spamsters. Nobody will bother 
+and complain about your postings.<P>
+
+Edit file <CODE>etc/modenv</CODE> and put
+<CODE>misc.jobs.misc</CODE> in the assignment to NEWSGROUP, for
+testing purposes.<P>
+
+<H2> Things to Test </H2>
+
+Test at least these conditions: 
+
+<TABLE border compact>
+<CAPTION align=top> Testing Schedule </CAPTION>
+
+<TH> Test Case <TH> Test Goal <TR>
+<TD> Moderators' list <TD> Moderators receive all message submitted to
+the address for thir private list. <TR> 
+<TD> Ackonwledgments of Receipt <TD> Submitters receive polite and
+informative messages for every message that they submit (you can turn
+ack mode off for individuals or even altogether) <TR> 
+<TD> Distribution of Submissions <TD> Each message submitted to the
+robomoderator gets sent to a randomly selected human moderator in an
+appropriate format. <TR> 
+<TD> Approvals work <TD> Messages approved by human moderators actually
+get posted. <TR> 
+<TD> Rejections Work <TD> Messages rejected by human moderators do not
+get posted; submitters receive polite and informative explanations of
+the reasons of rejection, and pointers to FAQ and Charter of your
+newsgroup. <TR> 
+<TD> White List Works <TD> Messages sent by users whose "From: "
+addresses match regular expressions in the good.guys.list file. <TR> 
+</TABLE>
+
+<HR>
+<B>**The End**</B>
