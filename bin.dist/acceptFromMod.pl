@@ -1,7 +1,25 @@
+#!/usr/bin/env perl
 #
+# Copyright 1999-2000 Igor Chudov
+#
+# This file is part of STUMP.
+# 
+# STUMP is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# STUMP is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
+# 
+# 
 # This script accepts an email from moderators and processes
 # an approval or a rejection.
-#
  
 $MNG_ROOT = $ENV{'MNG_ROOT'} || die "\$MNG_ROOT is not defined";
  

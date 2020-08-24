@@ -1,5 +1,22 @@
 /* antivirus.c - 
 
+   Copyright 1996 Igor Chudov
+
+   This file is part of STUMP.
+
+   STUMP is free software: you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   STUMP is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
+
    This program replaces all "dangerous" characters in the incoming file
    to '_' character. Dangerous characters are all characters less than 32 
    (space) and not equal to \n, \r, \t, \f and ^H.
@@ -21,10 +38,6 @@
    feeding to mail processing scripts. It in fact may prove useful 
    against viruses exploiting weaknesses of C programs that overflow
    buffers, etc.
-
-   Copyright 1996, Igor Chudov. GNU Public license applies, and I am
-   not responsible for any damage arising from use of this program.
-
 */
 
 #include <stdio.h>
