@@ -59,6 +59,13 @@ This DIRECTORY contains explanations for various reasons for rejection.
 Refer to "reject" script for details on rejection reasons, names and
 files.
 
+The following copyright and licence notice applies to the files in
+this directory: Copyright 1996-2000 Igor Chudov. This document is
+licensed under the Creative Commons Attribution 4.0 International
+License. To view a copy of this license, visit
+http://creativecommons.org/licenses/by/4.0/ or send a letter to
+Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
 ==================================================> modack.approved
 
 This shell script is used to send acknowledgments to posters whose messages
@@ -114,3 +121,12 @@ formail in some non-standard place.
 This file defines rules for processing incoming mail. You will
 need to edit it extensively if your group relies on different 
 system of aliases than those that I recommend (a bad idea!).
+
+
+-------------------------------------------------------------------
+
+Copyright 1996-2000 Igor Chudov. This work is licensed under the
+Creative Commons Attribution 4.0 International License. To view a copy
+of this license, visit http://creativecommons.org/licenses/by/4.0/ or
+send a letter to Creative Commons, PO Box 1866, Mountain View, CA
+94042, USA.
