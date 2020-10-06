@@ -1,5 +1,13 @@
 To the extent that they are copyrightable, the following notice
-applies to the files in this directory:
+applies to the following files in this directory:
+
+bad.guys.list
+bad.words.list
+good.guys.list
+noack.list
+pgp.must.list
+pubring.pgp
+README
 
 Copyright 1996-2000 Igor Chudov. This work is licensed under the
 Creative Commons Attribution 4.0 International License. To view a copy
