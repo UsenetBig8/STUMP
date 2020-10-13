@@ -23,40 +23,41 @@
 
 # echo $0 invoked with arguments $@ 1>&2
 
-MESSAGE=$TMP/rejected.$$
+MESSAGE="$TMP"/rejected.$$
 
 shift; REASON="$1"; export REASON; shift 
 #EXPLANATION="$@"; export EXPLANATION
 
-echo Action: processRejected, reason=$REASON 1>&2
+echo Action: processRejected, reason="$REASON" 1>&2
 
-cat  > $MESSAGE
+cat  > "$MESSAGE"
 
 save() { 
-  procmail -p -f- $MNG_ROOT/etc/procmail/save-rejected < $MESSAGE
+  procmail -p -f- "$MNG_ROOT"/etc/procmail/save-rejected < "$MESSAGE"
 }
 
 reply() {
 
   (
-    cat $MESSAGE | formail -rt -I "Reply-To: $BOARD" 	\
-			       -I "Errors-To: $MUNGED_ADDRESS"	
+    formail -rt -I "Reply-To: $BOARD" 	    \
+            -I "Errors-To: $MUNGED_ADDRESS" \
+	    < "$MESSAGE"
     (
       echo "$EXPLANATION"
       echo
 
       if [ "x$REASON" != "xcustom" ] ; then
-	cat $MNG_ROOT/etc/messages/$REASON
+	cat "$MNG_ROOT"/etc/messages/"$REASON"
       fi
 
       echo ""
       echo ============================================ Full text of your message follows
-      sed 's/^/> /' < $MESSAGE
+      sed 's/^/> /' < "$MESSAGE"
     ) | stump-pgp -staf -z "$PMPASSWORD" 	\
             -u "$ROBOMOD_APPROVAL" +clearsig=on  2>/dev/null \
-  ) | sendmail -t -f $MUNGED_ADDRESS
+  ) | sendmail -t -f "$MUNGED_ADDRESS"
 }
 
 save
-reply $1
-rm $MESSAGE
+reply "$1"
+rm "$MESSAGE"

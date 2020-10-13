@@ -17,6 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
 
-echo Bogus message: $@ 1>&2
+echo Bogus message: "$@" 1>&2
 
-cat | mail -s "Bogus Message" $ADMIN
+cat | mail -s "Bogus Message" "$ADMIN"

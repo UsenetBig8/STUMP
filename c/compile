@@ -21,9 +21,9 @@
 CC=cc
 
 for i in checkquot antivirus cuthead isbinary; do
-  echo -n Compiling $i.c with $CC...
-  if $CC -o ../bin/$i $i.c; then
-    echo  done
+  printf "Compiling %s.c with %s..." "$i" "$CC"
+  if "$CC" -o ../bin/"$i" "$i".c; then
+    echo  "done"
   else
     echo ""
   fi

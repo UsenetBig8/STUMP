@@ -26,11 +26,10 @@
 
 FILTER="NO_$2_LIST";
 
-RECIPIENTS="`cat $MNG_ROOT/etc/moderators \
-	     | grep -v "$FILTER"               \
-             | grep -v '^#'               \
-             | awk '{print $1;}'          \
-             | tr '\n' ',' `"
+RECIPIENTS="$(grep -v "$FILTER" "$MNG_ROOT"/etc/moderators \
+             | grep -v '^#'                                \
+             | awk '{print $1;}'                           \
+             | tr '\n' ',' )"
 
 (
      formail                                                            \
@@ -42,5 +41,5 @@ RECIPIENTS="`cat $MNG_ROOT/etc/moderators \
        -I "Resent-To:"							\
        -I "X-Maintainer: $ADMIN"    					\
        -I "Errors-To: $ADMIN"
-     cat $MNG_ROOT/etc/mods.sig
-) | sed 's/^\.$/\.\./' | sendmail $RECIPIENTS
+     cat "$MNG_ROOT"/etc/mods.sig
+) | sed 's/^\.$/\.\./' | sendmail "$RECIPIENTS"

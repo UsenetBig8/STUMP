@@ -22,17 +22,17 @@ if [ "$PGP" = "none" ] ; then
 else 
   if [ "x$PGP" = "x" ] ; then
     if which pgp ; then
-      pgp $@
+      pgp "$@"
     else
-      cat $@
+      cat "$@"
       echo used cat because pgp was not found 1>&2
     fi
   else
-    if [ -x $PGP ] ; then
-      $PGP $@
+    if [ -x "$PGP" ] ; then
+      "$PGP" "$@"
     else
       echo Please define variable PGP in your admin/etc/modenv file 1>&2
-      pgp $@
+      pgp "$@"
     fi
   fi
 fi

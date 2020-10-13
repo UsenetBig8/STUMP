@@ -19,10 +19,10 @@
 
 TMPFILE=$TMP/reply.$$
 
-cat > $TMPFILE
+cat > "$TMPFILE"
 
 (
-  formail -rt -I "Reply-To: $NOACK" < $TMPFILE
+  formail -rt -I "Reply-To: $NOACK" < "$TMPFILE"
   cat <<_EOB_
 Hello,
 
@@ -44,7 +44,7 @@ simply reply to this message, QUOTING ITS TEXT IN FULL.
 
 _EOB_
 
-  sed 's/^/> /' < $TMPFILE
-) | sendmail -t -f $MUNGED_ADDRESS
+  sed 's/^/> /' < "$TMPFILE"
+) | sendmail -t -f "$MUNGED_ADDRESS"
 
-rm $TMPFILE
+rm "$TMPFILE"

@@ -277,5 +277,5 @@ export BEGIN_PGP_SIGNED_MESSAGE BOT_SUBJECT_PREFIX
 
 if [ "x$1" != "x" ]; then
   umask 077
-  antivirus | decodeBase64 | $@
+  antivirus | decodeBase64 | "$@"
 fi

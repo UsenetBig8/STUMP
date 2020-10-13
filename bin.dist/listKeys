@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
 
-PUBRING=$MNG_ROOT/data/pubring.pgp
+PUBRING="$MNG_ROOT"/data/pubring.pgp
 
-pgp -kvv +pubring=$PUBRING
+pgp -kvv +pubring="$PUBRING"
 

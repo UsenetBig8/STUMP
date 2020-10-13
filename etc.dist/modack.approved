@@ -18,7 +18,7 @@
 # along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
 
 (
-  cat $@ | formail -rt -I "Reply-To: $NOACK"
+  cat "$@" | formail -rt -I "Reply-To: $NOACK"
   cat <<_EOB_
 Hello,
 
@@ -35,5 +35,5 @@ If you do not want to receive automatic acknowledgments in the future,
 simply reply to this message, QUOTING ITS TEXT IN FULL.
 
 _EOB_
-  cat $@
-) | sendmail -t -f $MUNGED_ADDRESS
+  cat "$@"
+) | sendmail -t -f "$MUNGED_ADDRESS"

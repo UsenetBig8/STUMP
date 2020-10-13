@@ -21,4 +21,4 @@
 # This script accepts an email from moderators and processes
 # an approval or a rejection.
 
-grep '^Activity' < $HOME/Mail/from | less
+grep '^Activity' < "$HOME"/Mail/from | less

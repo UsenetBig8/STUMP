@@ -19,23 +19,23 @@
 
 NAME="$1"
 
-TMPFILE=$TMP/vrfy.$$
+TMPFILE="$TMP"/vrfy.$$
 
-cat > $TMPFILE
+cat > "$TMPFILE"
 
-if grep -e "^$BEGIN_PGP_SIGNED_MESSAGE" < $TMPFILE >/dev/null; then
+if grep -e "^$BEGIN_PGP_SIGNED_MESSAGE" < "$TMPFILE" >/dev/null; then
   SIGNED="YES"
 else
   SIGNED="NO"
 fi
 
-if [ $SIGNED = "NO" ] ; then 
-  if [ "x$1" != "x" ] ; then
+if [ "$SIGNED" = "NO" ] ; then 
+  if [ "x$NAME" != "x" ] ; then
     echo "No valid sig!" 1>&2
-    rm $TMPFILE
+    rm "$TMPFILE"
     exit 1
   else 
-    rm $TMPFILE
+    rm "$TMPFILE"
     exit 0
   fi
 fi
@@ -47,17 +47,17 @@ fi
 GOODSIG="Good signature from user \""
 
 DoPGP() {
-  stump-pgp -f +batchmode=on +pubring=$MNG_ROOT/data/pubring.pgp < $TMPFILE 2>&1 > /dev/null
+  stump-pgp -f +batchmode=on +pubring="$MNG_ROOT"/data/pubring.pgp < "$TMPFILE" 2>&1 > /dev/null
 }
 
-USERID="`DoPGP | grep -e "^$GOODSIG" | sed \"s/^$GOODSIG//\" | sed 's/"\.$//'`"
+USERID="$(DoPGP | grep -e "^$GOODSIG" | sed \"s/^$GOODSIG//\" | sed 's/"\.$//')"
 
-rm $TMPFILE
+rm "$TMPFILE"
 
 echo USERID = "$USERID" 1>&2
 
-if [ "x$1" != "x" ]; then
-  if [ "$USERID" = "$1" ] ; then
+if [ "x$NAME" != "x" ]; then
+  if [ "$USERID" = "$NAME" ] ; then
     exit 0
   else
     exit 1

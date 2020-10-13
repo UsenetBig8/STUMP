@@ -24,9 +24,9 @@
 # You may omit this file when initially setting up STUMP.
 
 (
-  echo -n `date` "Number of articles: "
-  grep processApproved < $HOME/Mail/from | wc -l
-) >> $HOME/.posted_log
+  printf "%s Number of articles: " "$(date)"
+  grep -c processApproved < "$HOME"/Mail/from
+) >> "$HOME"/.posted_log
 
 (
 cat << _EOB_
@@ -36,6 +36,6 @@ What is important is daily differences between totals.
 
 _EOB_
 
-tail $HOME/.posted_log
+tail "$HOME"/.posted_log
 
-)| mail -s "Number of posted Articles" $1
+)| mail -s "Number of posted Articles" "$1"

@@ -19,10 +19,10 @@
 
 if [ "x$@" = "x" ]; then
 
-  cat >> $MNG_ROOT/data/good.guys.list
+  cat >> "$MNG_ROOT"/data/good.guys.list
 
 else
 
-  echo $@ >> $MNG_ROOT/data/good.guys.list
+  echo "$@" >> "$MNG_ROOT"/data/good.guys.list
 
 fi

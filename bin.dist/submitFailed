@@ -17,10 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
 
-cd $MNG_ROOT/tmp
+cd "$MNG_ROOT"/tmp || exit 1
 
 for i in failed*; do 
-  if $RNEWS < $i; then
-    /bin/rm $i
+  if "$RNEWS" < "$i"; then
+    /bin/rm "$i"
   fi
 done

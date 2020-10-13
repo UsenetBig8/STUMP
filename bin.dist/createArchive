@@ -17,15 +17,15 @@
 # You should have received a copy of the GNU General Public License
 # along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
 
-DATE="`date +%y%m%d`"
+DATE="$(date +%y%m%d)"
 
 ArchFile() {
-  FILE=$1
-  DEST=$MNG_ROOT/archive/old/$FILE.$DATE
-  mv $MNG_ROOT/archive/$FILE $DEST
-  gzip -9 $MNG_ROOT/archive/old/$FILE.$DATE
-  chmod 644 $DEST.gz
-  ln -fs $DEST.gz $MNG_ROOT/archive/old/$FILE.current
+  FILE="$1"
+  DEST="$MNG_ROOT"/archive/old/"$FILE"."$DATE"
+  mv "$MNG_ROOT"/archive/"$FILE" "$DEST"
+  gzip -9 "$MNG_ROOT"/archive/old/"$FILE"."$DATE"
+  chmod 644 "$DEST".gz
+  ln -fs "$DEST".gz "$MNG_ROOT"/archive/old/"$FILE".current
 }
 
 ArchFile approved
@@ -33,4 +33,4 @@ ArchFile rejected
 ArchFile incoming
 
 echo New copy of archive has been created. Please update your home page \
-  | mail $ADMIN
+  | mail "$ADMIN"

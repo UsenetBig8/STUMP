@@ -20,25 +20,25 @@
 # posts a nice report
 #
 
-TODAY="`date`"
-DATE6="`date +%y%m%d`"
+TODAY="$(date)"
+DATE6="$(date +%y%m%d)"
 
 LOGFILE="$HOME/Mail/from"
 LOGFILE_ARCHIVED="$MNG_ROOT/archive/old/from.$DATE6"
 
 Report() {
-  echo Subject: $NEWSGROUP report for $TODAY
-  echo Newsgroups: $NEWSGROUP
-  echo To: $SUBMIT
-  echo From: $ADMIN
-  echo Reply-To: $ADMIN
+  echo Subject: "$NEWSGROUP" report for "$TODAY"
+  echo Newsgroups: "$NEWSGROUP"
+  echo To: "$SUBMIT"
+  echo From: "$ADMIN"
+  echo Reply-To: "$ADMIN"
   echo Organization: CrYpToRoBoMoDeRaToR CaBaL
   echo ""
 
 (
-  echo Subject: $NEWSGROUP report for $TODAY
-  echo Newsgroups: $NEWSGROUP
-  echo Date: $TODAY
+  echo Subject: "$NEWSGROUP" report for "$TODAY"
+  echo Newsgroups: "$NEWSGROUP"
+  echo Date: "$TODAY"
   echo ""
 
 cat << _EOB_
@@ -59,11 +59,11 @@ properly.
 
 _EOB_
 
-  stump-report.pl $LOGFILE
-) | stump-pgp -staf -u $PMUSER_APPROVAL -z "$PMPASSWORD" 2>/dev/null
+  stump-report.pl "$LOGFILE"
+) | stump-pgp -staf -u "$PMUSER_APPROVAL" -z "$PMPASSWORD" 2>/dev/null
 }
 
 Report | sendmail -t
 
-mv $LOGFILE $LOGFILE_ARCHIVED
-gzip -9 $LOGFILE_ARCHIVED &
+mv "$LOGFILE" "$LOGFILE_ARCHIVED"
+gzip -9 "$LOGFILE_ARCHIVED" &
