@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 # Copyright 1996-2000 Igor Chudov
+# Copyright 2020 Tristan Miller
 #
 # This file is part of STUMP.
 # 
