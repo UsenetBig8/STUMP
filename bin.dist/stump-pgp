@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 # Copyright 1999-2000 Igor Chudov
+# Copyright 2020 Tristan Miller
 #
 # This file is part of STUMP.
 # 
@@ -21,7 +22,7 @@ if [ "$PGP" = "none" ] ; then
   cat
 else 
   if [ "x$PGP" = "x" ] ; then
-    if which pgp ; then
+    if command -v pgp > /dev/null 2>&1; then
       pgp "$@"
     else
       cat "$@"
