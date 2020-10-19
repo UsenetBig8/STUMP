@@ -1,5 +1,6 @@
 /*
    Copyright 1999-2000 Igor Chudov
+   Copyright 1999-2000 Leonid Umantsev
 
    This file is part of STUMP.
 
