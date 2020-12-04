@@ -139,7 +139,8 @@ print STDERR "posting to ANOTHER moderated newsgroups\n";
     $Newsgroups .= ",$Newsgroup";
     if( $#newsgroups + 1 >= $maxNewsgroups ) {
 print STDERR "Too many newsgroups\n";
-      return "$Command_Reject crosspost Too many newsgroups, FIVE is maximum.";
+      return "$Command_Reject crosspost Too many newsgroups, " .
+             "$maxNewsgroups is maximum.";
     }
   }
 
