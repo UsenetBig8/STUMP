@@ -1,4 +1,4 @@
-https://www.big-8.org/wiki/Board:Panix_account_and_STUMP_setup#Setting_up_another_newsgroup_in_STUMP.2FWebSTUMP
+The following steps were used to add comp.ai to our existing STUMP/WEBSTUMP installation. We would appreciate any feedback to these steps!
 
 Steps I followed:
 
