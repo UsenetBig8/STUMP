@@ -60,5 +60,7 @@ reply() {
 }
 
 save
-reply "$1"
+if [ "x$REASON" != "xignore" ]
+  reply "$1"
+fi
 rm "$MESSAGE"
