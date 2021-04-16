@@ -25,6 +25,8 @@
 #    moderator for review.
 #
 
+use Email::Address 1.910 # Earlier versions are vulnerable to DoS attacks
+
 $MNG_ROOT = $ENV{'MNG_ROOT'};
 $Prefix   = $ENV{'BOT_SUBJECT_PREFIX'};
 $tempFile = "$ENV{'TMP'}/signed.$$";
@@ -72,8 +74,15 @@ sub readMessage {
 
       } elsif( /^From: / ) {
         $From = $_;
-	if ($From =~ m/([\w-\.]+)@([\w-\.]*)[^\w-\.]/){
-	    $From = "From: $1\@$2";}
+        my @addresses = Email::Address->parse($From);
+        if (@addresses) {
+            # Parser found an address
+            $From = $addresses[0]->address;
+        } else {
+            # No address detected. Behave like the previous version of this
+            # script in this situation and pass on whatever the header contains.
+            $From =~ s/^From: //i;
+        }
       } elsif( /^Path: / ) {
         $Path = $_;
       } elsif( /^Keywords: / ) {
@@ -97,7 +106,6 @@ $MNG_ROOT = "$ENV{'MNG_ROOT'}" || die "Root dir for moderation not specified";
 
 if( $isTesting eq 'y' ) {
   $moderator = $From; # $TestModerator;
-  $moderator =~ s/^From: //i;
 
   } else { # get random moderator
   open( MODERATORS, "$MNG_ROOT/etc/moderators" ) 

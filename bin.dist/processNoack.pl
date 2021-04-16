@@ -20,6 +20,8 @@
 # Processes the "No Ack" request
 #
 
+use Email::Address 1.910 # Previous versions are vulnerable to DoS attacks
+
 # get the directory where robomod is residing
 $MNG_ROOT = $ENV{'MNG_ROOT'} || die "Root dir for moderation not specified";
 
@@ -37,10 +39,12 @@ while( <STDIN> ) {
   last if( /^$/ );
 }
 
-$From =~ s/^From: //;
-if( $From =~ m/([\w-\.]*)\@([\w-\.]+)/ ) {
-  $From = "$1\@$2";
+my @addresses = Email::Address->parse($From);
+if (@addresses) {
+  $From = $addresses[0]->address;
 } else {
+  $From =~ s/^From: //;
+  chomp $From;
   print STDERR "From line `$From' is incorrect\n";
   exit 0;
 }
