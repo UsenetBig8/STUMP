@@ -19,7 +19,7 @@
 # along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
 
 (
-  cat "$@" | formail -rt -I "Reply-To: $NOACK"
+  cat "$@" | formail -brt -I "Reply-To: $NOACK"
   cat <<_EOB_
 Hello,
 

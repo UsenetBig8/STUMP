@@ -23,7 +23,7 @@ TMPFILE=$TMP/reply.$$
 cat > "$TMPFILE"
 
 (
-  formail -rt -I "Reply-To: $NOACK" < "$TMPFILE"
+  formail -brt -I "Reply-To: $NOACK" < "$TMPFILE"
   cat <<_EOB_
 Hello,
 
