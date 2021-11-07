@@ -21,7 +21,7 @@
 cd "$MNG_ROOT"/tmp || exit 1
 
 for i in failed*; do 
-  if "$RNEWS" < "$i"; then
+  if $RNEWS < "$i"; then
     /bin/rm "$i"
   fi
 done

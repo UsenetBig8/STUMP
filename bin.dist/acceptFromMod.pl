@@ -124,6 +124,7 @@ while( <STDIN> ) {
 
     &processError( "Wrong rejection reason" )
        if( !( -r "$MNG_ROOT/etc/messages/$reason" ) 
+	   && ($reason ne "ignore")
 	   && ($reason ne "custom")
          );
  

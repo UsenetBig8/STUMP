@@ -298,6 +298,7 @@ sub ignoreHeader {
   return 1 if( $header =~ /^Sender:/i );
   return 1 if( $header =~ /^In-Reply-To:/i );
   return 1 if( $header =~ /^Originator:/i );
+  return 1 if( $header =~ /^X-Trace:/i );
 
   return 0;
 }
@@ -319,12 +320,19 @@ sub readMessage {
   open( TMPFILE, "> $TmpFile" );
 
   $IsBody = 0;
+  my $ignoring = 0;
   
   while( <> ) {
     $Body .= $_;
 
+# Ignore headers that cause trouble. Ignore their continuation lines too.
     if( !$IsBody && &ignoreHeader( $_ ) ) {
+      $ignoring = 1;
       next;
+    } elsif (!$IsBody && $ignoring && /^\s/) {
+      next
+    } else {
+      $ignoring = 0;
     }
 
     print TMPFILE;

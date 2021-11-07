@@ -60,7 +60,7 @@ reply() {
 }
 
 save
-if [ "x$REASON" != "xignore" ]
+if [ "x$REASON" != "xignore" ] ; then
   reply "$1"
 fi
 rm "$MESSAGE"

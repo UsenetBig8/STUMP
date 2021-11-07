@@ -72,7 +72,7 @@ post() {
   )                                                     \
     | "$PMAPP_PROG"					\
     | tee "$FAILED"                                     \
-    | "$RNEWS"
+    | $RNEWS
   if [ "$?" = "0" ] ; then
     /bin/rm "$FAILED"
   else
