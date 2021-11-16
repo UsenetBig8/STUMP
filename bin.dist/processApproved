@@ -27,7 +27,7 @@ TMPFILE="$TMP"/pa."$DATE_STAMP".$$
 if [ "$PGP" = "none" ]; then
   PMAPP_PROG=cat
 else
-  PMAPP_PROG="PMAPP $NEWSGROUP"
+  PMAPP_PROG="$PMAPP $NEWSGROUP"
 fi
 
 echo Action: processApproved 1>&2
@@ -70,7 +70,7 @@ post() {
     fi
 
   )                                                     \
-    | "$PMAPP_PROG"					\
+    | $PMAPP_PROG					\
     | tee "$FAILED"                                     \
     | $RNEWS
   if [ "$?" = "0" ] ; then
@@ -81,7 +81,6 @@ post() {
 }
 
 PMUSER="$PMUSER_APPROVAL"; export PMUSER
-ROBOMOD="$ROBOMOD_APPROVAL"; export ROBOMOD
 save
 post
 
