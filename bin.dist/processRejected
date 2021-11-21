@@ -52,7 +52,7 @@ reply() {
       fi
 
       echo ""
-      echo ============================================ Full text of your message follows
+      echo ========== Full text of your message follows ==========
       sed 's/^/> /' < "$MESSAGE"
     ) | stump-pgp -staf -z "$PMPASSWORD" 	\
             -u "$PMUSER_APPROVAL" +clearsig=on  2>/dev/null \

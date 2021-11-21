@@ -141,12 +141,19 @@ print STDERR "After body\n";
 &processError( "No Command Specified" ) if( !$command );
 
 while( <> ) {
-  if( /^comment/ ) {
-    s/^comment//;
+  if( s/^comment\s*// ) {
     $comment = $_;  
     $comment .= $_ while( <> );
   }
 }
+# Wrap long lines at column 72
+# This uses forward lookahead to find lines of 73 characters or more.
+# If there is whitespace within the first 72 characters, the last
+# sequence of whitespace in the 72 characters will be replaced by a newline
+# and the substitution will repeat as many times as needed. If there is no
+# whitespace in the first 72 characters, the first whitespace sequence after
+# 72 characters will be replaced by a newline.
+$comment =~ s/(?=.{73,})(.{0,72})\s+/$1\n/mg;
 
 print STDERR "Comment is: $comment\n" if( $comment );
 
@@ -160,7 +167,7 @@ open( COMMAND, "| $command" ) ||  &processError( "$command failed" );
 
   if( $comment && !($command =~ '^processRejected') ) {
     print COMMAND 
-          "\n======================================= MODERATOR'S COMMENT: \n" .
+          "\n========== MODERATOR'S COMMENT ==========\n" .
           $comment;
   }
 #close( COMMAND );
