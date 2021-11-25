@@ -142,6 +142,7 @@ print STDERR "Too many newsgroups\n";
       return "$Command_Reject crosspost Too many newsgroups, " .
              "$maxNewsgroups is maximum.";
     }
+    $BadNewsgroupsHeader ||= 'nogroup';
   }
 
   return 0;
@@ -400,6 +401,12 @@ print STDERR "BAD NEWSSERVER\n";
 &readMessage();
 
 if( !$Newsgroups ) {
+  # Record issues with Newsgroups header to pass to moderator/Webstump
+  if ( !defined($Newsgroups)) {
+    $BadNewsgroupsHeader = 'missing';
+  } else {
+    $BadNewsgroupsHeader = 'empty';
+  }
   $Newsgroups = $Newsgroup;
 }
 
@@ -446,6 +453,7 @@ open( TMPFILE, "$TmpFile" ) || die "cant open tmpfile";
       print COMMAND "X-Origin: $X_Origin, $_" if $X_Origin;
       print STDERR "Subject =`$Subject'\n";
       print COMMAND "Subject: No subject given\n" if !$Subject;
+      print COMMAND "X-STUMP-Warning: Newsgroups header $BadNewsgroupsHeader\n" if $BadNewsgroupsHeader;
       # nothing
     } elsif( /^From: / && !$IsBody) {
       next if $FromWasUsed;
