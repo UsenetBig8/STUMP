@@ -229,9 +229,8 @@ fi
 PGPPASSFD=0
 export PGPPASSFD
 {
-    echo "$PMPASSWORD"
     cat $TF.h $TF.b | pmcanon
-} | pgp -sabf +BATCHMODE=on -u "$PGPUSER" >$TF.s 2>$TF.e || {
+} | pgp -sabf +BATCHMODE=on -u "$PGPUSER" -z "$PMPASSWORD" >$TF.s 2>$TF.e || {
     echo >&2 "$0: PGP signing failed. PGP output:"
     cat >&2 $TF.e
     exit 1

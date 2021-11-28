@@ -144,7 +144,7 @@ while read GROUP; do
 	END_OF_SIG
 
     # Now we can check the signature.
-    pgp +BATCHMODE=on -t $TF.s $TF.m </dev/null >$TF.e 2>&1
+    pgp +BATCHMODE=on $TF.s $TF.m </dev/null >$TF.e 2>&1
     STATUS=$?
 #    cat >&2 $TF.s 
 #    echo ====
@@ -187,7 +187,7 @@ while read GROUP; do
 	;;
     esac
 
-    SIG=`sed -n 's/Good signature from user "\(.*\)"./\1/p' $TF.e`
+    SIG=`sed -n 's/\(gpg: \)\?Good signature from\( user\)\? "\(.*\)"./\3/p' $TF.e`
     if [ "x$SIG" = "x" ]; then
 	# this one "can't happen"
 	echo >&2 "$0: MOOSE ERROR: Invalid signature for $GROUP on $FILE."

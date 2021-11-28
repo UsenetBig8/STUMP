@@ -88,9 +88,8 @@ $badWords = "bad.words.list";
 # list of people who want all their submissions to be signed
 $PGPMustList = "pgp.must.list";
 
-# set PMUSER and ROBOMOD to Internal. Will be used by `suspicious' script.
+# set PMUSER to Internal. Will be used by `suspicious' script.
 $ENV{'PMUSER'} = $ENV{'PMUSER_INTERNAL'};
-$ENV{'ROBOMOD'} = $ENV{'ROBOMOD_INTERNAL'};
 
 
 ######################################################################
