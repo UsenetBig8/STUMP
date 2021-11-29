@@ -46,6 +46,10 @@ First of all, please take your time and be prepared to be patient. Since configu
 
 -   The news.admin.moderation newsgroup is a forum for asking questions and getting help with moderation related issues.
 
+## Understanding Moderation
+
+
+
 ## Initial Setup
 
 The steps outlined in this chapter should be done only once at the beginning, when setting up the robomoderator. Suppose that you, are the moderator of the newly created group, and your users like to refer to your group as **csfm**.
