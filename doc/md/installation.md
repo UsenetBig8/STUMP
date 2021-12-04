@@ -81,16 +81,17 @@ Depending on the nature of the group, acceptable turnaround time can range from 
 
 ## Initial Setup
 
-The steps outlined in this chapter should be done only once at the beginning, when setting up the robomoderator. Suppose that you, are the moderator of the newly created group, and your users like to refer to your group as **csfm**.
+The steps outlined in this chapter should be done only once at the beginning, when setting up the robomoderator. Suppose that you, are the moderator of the newly created group, and your users like to refer to your group as misc.newsgroup.moderated or **mnm**.
 
 ### Server Prerequisites
 
-It is recommended to run STUMP on a dedicated server or virtual server like a VPS or a public cloud instance that also a Usenet server. It is possible to run these servers on a home PC if a dynamic DNS service is available but a dedicated server is always best. Be aware that if you area also hosting a mail server, there is the possibility to confuse incming Usenet and
+It is recommended to run STUMP on a dedicated server or virtual server like a VPS or a public cloud instance that also a Usenet server. It is possible to run these servers on a home PC if a dynamic DNS service is available but a dedicated server is always best.
 
-You need a separate user ID to run your robomoderator program. There are two compelling reasons for that. First of all, submissions to your newsgroup will arrive to the moderation address by email. It is very easy to confuse submissions and personal emails. Imagine how disappointed would be your private correspondents if you mistakenly post their private emails!
+A best practice would be to create a dedicated user or alias per newsgroup so mail filtering is easy to work with. Mail filtering applications like procmail best with clear differences like different email addresses.
 
-Second, and more important, reason for having a separate account for personal work and robomoderator is security. Internet is a wild and dangerous place full of people willing to inflict serious harm on others just for the sheer fun of it. I have proofread and verified all
-moderation scripts for security, and built extensive protection against malicious attacks aiming to hack robomoderation account. However, I cannot give you a 100% assurance that robomoderation process is secure.
+### Security
+
+The Perl scrips that are used in STUMP and WebSTUMP have been proofread and verified for security in the past and built extensive protection against malicious attacks aiming to hack robomoderation account. However, the original code is over 20 years old and may not be completely reliable. Of course, being that this is an open-source application, 
 
 If you operate robomoderator from your private account and someone manages to hack it, all your private files will be open for prying eyes of people whom you do not even know. If it happens in an isolated account, the damage will be much more limited.
 
