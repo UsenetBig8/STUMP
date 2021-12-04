@@ -6,9 +6,9 @@ Attention! Before reading instructions, please read the specification and descri
 
 -   Where to get HELP
 -   Understanding Moderation
-    -   What is Usenet Moderation and how does it work?
-    -   What is Required to be a Moderator?
-    -   Are you really sure that you want to be a Moderator?
+    -   What does 'moderated' mean?
+    -   Why do Usenet moderated newsgroups exist ?
+    -   Role of a moderator
 -   Initial Setup
     -   Setting up a separate Linux account. [SYSADMIN]
     -   Setting up sendmail aliases. [SYSADMIN]
@@ -48,7 +48,36 @@ First of all, please take your time and be prepared to be patient. Since configu
 
 ## Understanding Moderation
 
+### What does 'moderated' mean ?
 
+'Moderated' means that all postings to the newsgroup go to a mail address (e.g., news.group@example.com) instead of appearing in the newsgroup directly. The postings are then forwarded via email to a moderator, or group of moderators, or even an automated program, who decides whether to actually inject the article into the newsgroup or to reject it as not meeting guidelines spelled out in the group's charter.
+
+The main purpose of newsgroup moderation is to prevent inappropriate posts to the newsgroup. For example, moderation can prevent discussion or requests for software from appearing in groups dedicated to posting
+source code. It can also be used to facilitate discussions, to create a forum for announcements, to prevent repeated posts of the same information, or to cut off endless uninformative arguments. Some groups, e.g., rec.humor.funny and some source groups, also use it to control the traffic volume.
+
+Moderation should not be used to censor unpopular viewpoints, or those that the moderator simply disagrees with. It is best to have a very clear charter and moderation policy for the newsgroup, so that newsgroup readers and posters can tell which topics are, or are not, appropriate for discussion on the newsgroup.
+
+### Why do Usenet moderated newsgroups exist ?
+
+Groups on the net are moderated for a variety of reasons. All moderation serves the same basic purpose, to filter out inappropriate postings and to deliver timely, on-topic articles. Most moderated groups fall into one of five general categories:
+
+1. Groups with postings of an informative nature not suited to discussion and always originating from the same (very small) group of posters. Groups within this category include news.lists, news.announce.newusers and comp.mail.maps.
+
+2. Groups derived from regular groups with such a high volume that it is hard for the average reader to keep up. The moderated versions of these groups are an attempt to provide a lower volume and higher quality version of the same forum. An example of this category is news.announce.newgroups (a reduced form of news.groups).
+
+3. Groups derived from regular groups that have often been abused. That is, the regular groups often received postings of items that were not germane to the stated topic of the group (or sometimes even within the realm of politeness for the net). This also includes groups suffering from an annoying number of duplicate postings and inappropriate followups. Moderated groups in this category include comp.sources.misc.
+
+4. Groups designed to serve as direct feedback to an off-the-net group. The discussion in comp.std.mumps is an example of this.
+
+5. Groups that are gatewayed into Usenet from an Internet mailing list. These groups are moderated by someone on the Internet side but are shared with the Usenet population. Submissions mailed to the proper addresses, given below, will appear in both the group on Usenet, and the Internet list. This includes some groups in the "inet" distribution such as comp.ai.vision.
+
+### Role of a moderator
+
+Moderating a newsgroup is a volunteer effort but it carries certain responsibilities. The role of a moderator is to review, approve and post articles relevant to a newsgroup according to the group's charter or guidelines.
+
+If an article does not qualify for posting, it is to be sent back to the author with an explanation of why it is not suitable for posting.
+
+Depending on the nature of the group, acceptable turnaround time can range from a few days to a few weeks. If posts accepted for the group have a long delay before being actually posted, as happens with moderated net magazines, it is a good idea to let the submitter know that the post was accepted, and what the approximate posting date will be.
 
 ## Initial Setup
 
