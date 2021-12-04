@@ -91,18 +91,9 @@ A best practice would be to create a dedicated user or alias per newsgroup so ma
 
 ### Security
 
-The Perl scrips that are used in STUMP and WebSTUMP have been proofread and verified for security in the past and built extensive protection against malicious attacks aiming to hack robomoderation account. However, the original code is over 20 years old and may not be completely reliable. Of course, being that this is an open-source application, 
+The Perl scrips that are used in STUMP and WebSTUMP have been proofread and verified for security in the past and built extensive protection against malicious attacks aiming to hack robomoderation account. However, the original code is over 20 years old and may not be completely reliable. Of course, being that this is an open-source application, feel free to contribute to the project or write your own moderation software!
 
-If you operate robomoderator from your private account and someone manages to hack it, all your private files will be open for prying eyes of people whom you do not even know. If it happens in an isolated account, the damage will be much more limited.
-
-All in all though, you can get along with just using your Linux account.
-
-If you do not have superuser privileges, you cannot set up a legitimate account. Please ask your system administrator to do it for you. A good name for such account would be comprised of first letters of your newsgroup name. For example, account for soc.culture.russian.moderated is called `scrm@algebra.com` (I am the sysadmin of algebra.com).
-
-You may call the robomod's account `csfm@yoursite.com`.
-
-Setting up sendmail aliases. **[SYSADMIN]**
----------------------------------------------
+### Setting up sendmail aliases
 
 Remember that robomoderator performs several functions:
 
@@ -111,22 +102,35 @@ Remember that robomoderator performs several functions:
 - Maintains moderators' private mailing list
 - Forwards complaints of posters to all human moderators
 
-For each such purpose, a separate email address must be established. Note the distinction between an email address and a user id: several email addresses may correspond to one user ID. These addresses should normally be *sendmail aliases*. These aliases are [normally] defined in file `/etc/aliases`. You should ask your systems adminiastrator to
-establish these aliases for your group. Below is the example of the part of aliases file for Comp.Sys.FooBars.Moderated.
+For each such purpose, a separate email address must be established. Note the distinction between an email address and a user id: several email addresses may correspond to one user ID. These addresses should normally be *sendmail aliases*. These aliases are normally defined in file `/etc/aliases`.
 
-######################################################################
-CSFM # Comp.Sys.FooBars.Moderated Aliases #
-######################################
-# # submissions csfm-submit: csfm # To me, technical problems
-csfm-admin: johndoe # Moderators' list csfm-mods: csfm #
-Non-technical complaints, same as "board" above csfm-board: csfm-mods
-# Mail errors, go to hell csfm-errors: /dev/null # Approved and
-rejected messages csfm-approved: csfm # Approval key autoreply Bot
-csfm-approval-key: csfm # for posters who do not want
-autoacknowledgments: csfm-noack: csfm # alternative names, for
-absent-minded posters comp-sys-foobars-moderated: csfm-submit
-comp.sys.foobars.moderated: csfm-submit As you can easily see, messages
-to all of these addresses go to the robomoderator's address.
+Example aliases file for Comp.Sys.FooBars.Moderated:
+
+```
+# submissions
+csfm-submit:                csfm                         
+# To me, technical problems
+csfm-admin:                 johndoe                       
+# Moderators' list
+csfm-mods:                  csfm                           
+# Non-technical complaints, same as "board" above
+csfm-board:                 csfm-mods                     
+# Mail errors, go to hell
+csfm-errors:                /dev/null                    
+# Approved and rejected messages
+csfm-approved:              csfm                       
+# Approval key autoreply Bot
+csfm-approval-key:          csfm                   
+# for posters who do not want autoacknowledgments:
+csfm-noack:                 csfm                          
+# alternative names, for absent-minded posters
+comp-sys-foobars-moderated: csfm-submit
+comp.sys.foobars.moderated: csfm-submit
+```
+
+As you can easily see, messages to all of these addresses go to the robomoderator's address.
+
+
 
 Note also, that if you have only one address and a sendmail-based
 system, and a non-cooperative sysadmin, you can try to get around the
@@ -135,6 +139,7 @@ yourname+comment@yoursite.com work, then you can use addresses like
 "csfm+approved@yoursite.com" instead. Make sure that they do in fact
 work (it is not guaranteed) and then edit your stump/etc/procmailrc
 accordingly.
+
 
 Setting up procmail
 -------------------
