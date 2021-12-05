@@ -159,32 +159,23 @@ Currently the best way to download Robomoderator is by cloning the source code f
 
 ```
 $  git clone https://git.savannah.gnu.org/git/stump.git
-``
+```
 
-### Unpacking Source
+### Creating the **..../etc** directory
 
-Creating **..../etc** directory
---------------------------------
-
-In the distribution that you receive, under ` $HOME/stump`, there is
-directory `$HOME/stump/etc.dist`. It should be **renamed** to
-` $HOME/stump/etc`, and you should do the same with bin.dist, tmp.dist
-and data.dist directories. etc contains files that you need to
-customize. The reason for such renaming is that when you receive
-upgrades of the robomod, the upgrade does not override the files that
-you customized.
+In the distribution that you receive, under ` $HOME/stump`, there is directory `$HOME/stump/etc.dist`. It should be **renamed** to ` $HOME/stump/etc`, and you should do the same with bin.dist, tmp.dist and data.dist directories. etc contains files that you need to customize. The reason for such renaming is that when you receive upgrades of the robomod, the upgrade does not override the files that you customized.
 
 Go through files in etc directory, and edit them carefully.
 
-Most of them are self explanatory. I put lots of comments in them. You
-should begin with editing the [stump/etc/modenv](modenv.txt) file.
+Most of them are self explanatory. I put lots of comments in them. You should begin with editing the [stump/etc/modenv](modenv.txt) file.
 
 Create a symbolic links for procmail:
 
-$ /bin/ln -s $HOME/stump/etc/procmailrc $HOME/.procmailrc mkdir
-$HOME/Mail # Creates directory for mail chmod 700 $HOME.Mail # Make
-it safe Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it
-to the needs of your newsgroup. Do it carefully.
+```
+$ /bin/ln -s $HOME/stump/etc/procmailrc $HOME/.procmailrc mkdir $HOME/Mail
+```
+
+Creates directory for mail chmod 700 $HOME.Mail # Make it safe Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it to the needs of your newsgroup. Do it carefully.
 
 **IMPORTANT:** Later you MUST make sure that procmail processes all your
 incoming mail correctly and that all rules are written right. For logs
@@ -194,8 +185,7 @@ detailed output.
 
 NOTE: file Mail/from is an excellent source of debugging information.
 
-Editing Data Files in **..../data**
-------------------------------------
+### Editing Data Files in **..../data**
 
 Rename `data.dist` to `data`.
 
