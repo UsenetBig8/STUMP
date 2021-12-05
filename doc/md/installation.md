@@ -4,11 +4,11 @@ Attention! Before reading instructions, please read the specification and descri
 
 ## Contents
 
--   Where to get HELP
 -   Understanding Moderation
     -   What does 'moderated' mean?
     -   Why do Usenet moderated newsgroups exist ?
     -   Role of a moderator
+-   System Requirements
 -   Initial Setup
     -   Setting up a separate Linux account. [SYSADMIN]
     -   Setting up sendmail aliases. [SYSADMIN]
@@ -34,17 +34,7 @@ Attention! Before reading instructions, please read the specification and descri
     -   "Vacationing" of moderators, maintenance of private
         mailing list for moderators.
 -   Upgrading the Robomoderator
-
-## Where to get Help
-
-First of all, please take your time and be prepared to be patient. Since configurations of local systems and newsgroups are different, setting them up takes some time. There are two ways you can get help. The first one is free, the second is not. If you know something about Linux, you probably can try to go the first route. If you are not a Linux person, second route may be the way to go.
-
--   STUMP-users mailing list.
-
-    There is a mailing list for STUMP users. You can subscribe and ask your questions there. They will likely be answered within a day or two. The mailing list information can be found at:
-    https://savannah.gnu.org/mail/?group=stump
-
--   The news.admin.moderation newsgroup is a forum for asking questions and getting help with moderation related issues.
+-   Where to Get Help
 
 ## Understanding Moderation
 
@@ -78,6 +68,18 @@ Moderating a newsgroup is a volunteer effort but it carries certain responsibili
 If an article does not qualify for posting, it is to be sent back to the author with an explanation of why it is not suitable for posting.
 
 Depending on the nature of the group, acceptable turnaround time can range from a few days to a few weeks. If posts accepted for the group have a long delay before being actually posted, as happens with moderated net magazines, it is a good idea to let the submitter know that the post was accepted, and what the approximate posting date will be.
+
+## System Requirements
+
+Stump should be able to be installed on any modern Linux, Unix, or BSD-based distribution that.
+The following packages should be available:
+
+* Perl
+* A working smtp server. sendmail is used in this guide.
+* Procmail
+* Access to a Usenet server with permission to inject approved messages.
+
+NOTE: At this stage, setting up STUMP is not for the newbie. We hope that this can be simplifies in the future, but at this time it takes some advanced system administration knowledge to get it working.
 
 ## Initial Setup
 
@@ -149,7 +151,11 @@ Set up and familiarize yourself with GnuPG (or GNU Privacy Guard), an excellent 
 
 Most likely you already have a perl interpreter. Simply type at your Linux command prompt:
 
-$ perl -v If you see some meaningful output, you are fine and you have perl. Otherwise you need to install it. You can install perl and it's libraries using your distribution's package manager.
+```
+$ perl -v
+```
+
+If you see some meaningful output, you are fine and you have perl. Otherwise you need to install it. You can install perl and it's libraries using your distribution's package manager.
 
 ## Starting with Robomoderator
 
@@ -161,21 +167,25 @@ Currently the best way to download Robomoderator is by cloning the source code f
 $  git clone https://git.savannah.gnu.org/git/stump.git
 ```
 
-### Creating the **..../etc** directory
+### Creating the stump/etc/ directory
 
-In the distribution that you receive, under ` $HOME/stump`, there is directory `$HOME/stump/etc.dist`. It should be **renamed** to ` $HOME/stump/etc`, and you should do the same with bin.dist, tmp.dist and data.dist directories. etc contains files that you need to customize. The reason for such renaming is that when you receive upgrades of the robomod, the upgrade does not override the files that you customized.
+In the distribution that you receive, under `stump/`, there is directory `stump/etc.dist/`. Rename it to `stump/etc/`, and you should do the same with `stump/bin.dist/`, `stump/tmp.dist/`, and `stump/data.dist` directories. `stump/etc/` contains files will need to be customized.
 
-Go through files in etc directory, and edit them carefully.
+The files in the `stump/etc/` directory, and edit them carefully.
 
-Most of them are self explanatory. I put lots of comments in them. You should begin with editing the [stump/etc/modenv](modenv.txt) file.
+Most of them are self explanatory and contain several comments. You should begin with editing the `modenv.txt`.
 
 Create a symbolic links for procmail:
 
 ```
-$ /bin/ln -s $HOME/stump/etc/procmailrc $HOME/.procmailrc mkdir $HOME/Mail
+$ /bin/ln -s $HOME/stump/etc/procmailrc $HOME/.procmailrc
+$ mkdir $HOME/Mail
 ```
 
-Creates directory for mail chmod 700 $HOME.Mail # Make it safe Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it to the needs of your newsgroup. Do it carefully.
+Creates directory for mail
+chmod 700 $HOME.Mail
+
+Make it safe Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it to the needs of your newsgroup. Do it carefully.
 
 **IMPORTANT:** Later you MUST make sure that procmail processes all your
 incoming mail correctly and that all rules are written right. For logs
@@ -355,14 +365,13 @@ White List Works
 Messages sent by users whose "From: " addresses match regular
 expressions in the good.guys.list file.
 
-------------------------------------------------------------------------
+## Where to get Help
 
-****The End****
+First of all, please take your time and be prepared to be patient. Since configurations of local systems and newsgroups are different, setting them up takes some time. There are two ways you can get help. The first one is free, the second is not. If you know something about Linux, you probably can try to go the first route. If you are not a Linux person, second route may be the way to go.
 
-------------------------------------------------------------------------
+-   STUMP-users mailing list.
 
-[![Creative Commons
-License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
-Copyright © 1996 Igor Chudov. This work is licensed under a [Creative
-Commons Attribution 4.0 International
-License](http://creativecommons.org/licenses/by/4.0/).
+    There is a mailing list for STUMP users. You can subscribe and ask your questions there. They will likely be answered within a day or two. The mailing list information can be found at:
+    https://savannah.gnu.org/mail/?group=stump
+
+-   The news.admin.moderation newsgroup is a forum for asking questions and getting help with moderation related issues.
