@@ -21,7 +21,7 @@ Attention! Before reading instructions, please read the specification and descri
     -   Setting .profile for robomod support
     -   Editing Data Files in **../data**
     -   Creating List for reasons of Rejection and Rejection Messages
-    -   Creating PGP keys.
+    -   Creating GnuPG keys.
     -   Compiling C programs in **../c** directory
 -   Testing Your Setup
     -   Choosing a victim group
@@ -137,63 +137,31 @@ Note also, that if you have only one address and a sendmail-based system, and a 
 
 You should set up **procmail** - an excellent, free third-party tool for flexible processing of incoming email messages. It works on any Linux. This is a standard package in most Linux distributions. Also, you can follow [this link](http://www.ii.com/internet/robots/) for an excellent introduction (and more!) to procmail.
 
-Look at the [sample .procmailrc file](procmailrc.txt) that is used by
-soc.culture.russian.moderated.
+Look at the [sample .procmailrc file](procmailrc.txt) that is used by soc.culture.russian.moderated.
 
+### Setting up GnuPG
 
+**NOTE:** Not all moderators need to set up GnuPG. You only need GnuPG if you plan to use PGP Moose for authentication of approvals. Skip the rest of this section if you are not interested. You can always return to it later. Make sure that the settings in the [stump/etc/modenv](modenv.txt) file are correct. If you plan to NOT use GnuPG, keep GnuPG set to "none" in the "stump/etc/modenv" file.
 
+Set up and familiarize yourself with GnuPG (or GNU Privacy Guard), an excellent third-party encryption and authentication program. GnuPG is a GNU free software version of the PGP application. This is another application that should be with most Linux and Unix distributions and can be installed with your distribution's package manager. The [GnuPG manual](https://gnupg.org/gph/en/manual.html) is available for newbies.
 
-Setting up PGP
---------------
+### Setting up Perl
 
-NOTE: Not all moderators need to set up PGP. You only need PGP if you
-plan to use PGP Moose for authentication of approvals. Skip the rest of
-this section if you are not interested. You can always return to it
-later. Make sure that the settings in the [stump/etc/modenv](modenv.txt)
-file are correct. If you plan to NOT use PGP, keep PGP set to "none"
-in the "stump/etc/modenv" file.
+Most likely you already have a perl interpreter. Simply type at your Linux command prompt:
 
-Set up and familiarize yourself with PGP, an excellent third-party
-encryption and authentification program.
+$ perl -v If you see some meaningful output, you are fine and you have perl. Otherwise you need to install it. You can install perl and it's libraries using your distribution's package manager.
 
-Download it from [this link](http://web.mit.edu/network/pgp.html). If
-you are not residing in the US or cannot download PGP from that page,
-try [this link](ftp://ftp.csua.berkeley.edu/pub/cypherpunks) and try to
-find PGP there.
+## Starting with Robomoderator
 
-Another link (in Norway) is this: [download PGP from Net sites
-outside](http://www.ifi.uio.no/pgp/).
+### Downloading STUMP
 
-PGP binary is provided for Linux and FreeBSD, see the main STUMP page
-for the reference.
+Currently the best way to download Robomoderator is by cloning the source code from the GNU Savannah git repository:
 
-Setting up Perl
----------------
+```
+$  git clone https://git.savannah.gnu.org/git/stump.git
+``
 
-Most likely you already have a perl interpreter. Simply type at your
-Linux command prompt:
-
-$ perl -v If you see some meaningful output, you are fine and you have
-perl. Otherwise you need to install it. Try [this link](http://perl.com)
-and follow instructions. Installing perl may be quite an effort, but
-good chances are that you do not need to do it.
-
-------------------------------------------------------------------------
-
-[]{#start}
-
-Starting with Robomoderator
-===========================
-
-Unpacking Source
-----------------
-
-Got to the home directory of your robomoderation account. Put there the
-`stump-....tar.gz` file that you just downloaded. Do this command:
-
-$ whoami csfm $ cd $HOME $ zcat stump_2_3.tar.gz | tar xvf - This
-command will produce a lot of files under the ` $HOME/stump`
-subdirectory.
+### Unpacking Source
 
 Creating **..../etc** directory
 --------------------------------
@@ -248,33 +216,33 @@ support robomod properly.
 
 Put this in your .profile or .login file: source $HOME/stump/etc/modenv
 
-Creating ONE PAIR of PGP keys.
+Creating ONE PAIR of GnuPG keys.
 ------------------------------
 
 [Skip this part if you do not plan on using PGP Moose].
 
 According to [the specification](spec.html) of the robomod, you have to
-have one PGP key - for signing approved articles with PGP Moose
+have one GnuPG key - for signing approved articles with PGP Moose
 application.
 
 Pick a passphrase that is not too hard to type and remember. Usage of
-these PGP keys is not a very high-security application, so you can
+these GnuPG keys is not a very high-security application, so you can
 select 512-bit key sizes. Save this passphrase in file
-`$HOME/.pgp-passphrase`
+`$HOME/.GnuPG-passphrase`
 
 . Make sure that this passphrase is not readable by anyone except the
 robomod user.
 
 Name the key by analogy with the key used for SCRM (see modenv file and
-user names there). Your PGP Key must be named like this:
+user names there). Your GnuPG Key must be named like this:
 
     pub   512/ABB554F5 1996/02/26 CSFM Approval Key <csfm-approval-key@yoursite.com>
 
-PGP Keys are generated using command pgp -kg -u "CSFM Approval Key
+GnuPG Keys are generated using command GnuPG -kg -u "CSFM Approval Key
 <csfm-approval-key@yoursite.com>"
 
 Copy your keyring to a specially designated place for STUMP: cp
-$HOME/.pgp/pubring.pgp $HOME/stump/data/pubring.pgp
+$HOME/.GnuPG/pubring.GnuPG $HOME/stump/data/pubring.GnuPG
 
 Compiling C programs in **stump/c** directory
 ---------------------------------------------
@@ -305,7 +273,7 @@ Make sure that you keep the following files:
 -   crosspost -- to send back when rejecting for megacrossposting
 -   charter -- to send back when rejecting for violating requirements
     of the charter that are checked automatically
--   signature -- to send back when rejecting for bogus PGP signature.
+-   signature -- to send back when rejecting for bogus GnuPG signature.
 
 Edit file `rejection-reasons.lst` and put there the reasons that your
 moderators are allowed to choose for rejections. They should have names
