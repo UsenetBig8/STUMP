@@ -81,7 +81,7 @@ Depending on the nature of the group, acceptable turnaround time can range from 
 
 ## Initial Setup
 
-The steps outlined in this chapter should be done only once at the beginning, when setting up the robomoderator. Suppose that you, are the moderator of the newly created group, and your users like to refer to your group as misc.newsgroup.moderated or **mnm**.
+The steps outlined in this chapter should be done only once at the beginning, when setting up the robomoderator. Suppose that you, are the moderator of the newly created group, and your users like to refer to your group as Comp.Sys.FooBars.Moderated or **csfm**.
 
 ### Server Prerequisites
 
@@ -130,32 +130,18 @@ comp.sys.foobars.moderated: csfm-submit
 
 As you can easily see, messages to all of these addresses go to the robomoderator's address.
 
+Note also, that if you have only one address and a sendmail-based system, and a non-cooperative sysadmin, you can try to get around the requirement to have several sendmail aliases. If addresses like yourname+comment@yoursite.com work, then you can use addresses like "csfm+approved@yoursite.com" instead. Make sure that they do in fact work (it is not guaranteed) and then edit your stump/etc/procmailrc accordingly.
 
 
-Note also, that if you have only one address and a sendmail-based
-system, and a non-cooperative sysadmin, you can try to get around the
-requirement to have several sendmail aliases. If addresses like
-yourname+comment@yoursite.com work, then you can use addresses like
-"csfm+approved@yoursite.com" instead. Make sure that they do in fact
-work (it is not guaranteed) and then edit your stump/etc/procmailrc
-accordingly.
+### Setting up procmail
 
-
-Setting up procmail
--------------------
-
-You should set up **procmail** - an excellent, free third-party tool for
-flexible processing of incoming email messages. It works on any Linux.
-You can download it from
-<ftp://ftp.informatik.rwth-aachen.de/pub/packages/procmail> . Also, you
-can follow [this link](http://www.ii.com/internet/robots/) for an
-excellent introduction (and more!) to procmail.
-
-Procmail binary is provided for Linux and FreeBSD, see the main STUMP
-page for the reference.
+You should set up **procmail** - an excellent, free third-party tool for flexible processing of incoming email messages. It works on any Linux. This is a standard package in most Linux distributions. Also, you can follow [this link](http://www.ii.com/internet/robots/) for an excellent introduction (and more!) to procmail.
 
 Look at the [sample .procmailrc file](procmailrc.txt) that is used by
 soc.culture.russian.moderated.
+
+
+
 
 Setting up PGP
 --------------
