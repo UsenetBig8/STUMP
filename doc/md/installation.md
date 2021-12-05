@@ -1,7 +1,5 @@
 # Instructions on Setup and Use of the STUMP Robomoderator
 
-Attention! Before reading instructions, please read the specification and description of how the robomoderator works.
-
 ## Contents
 
 -   Understanding Moderation
