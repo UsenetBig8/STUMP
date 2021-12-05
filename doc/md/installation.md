@@ -6,10 +6,10 @@
     -   What does 'moderated' mean?
     -   Why do Usenet moderated newsgroups exist ?
     -   Role of a moderator
--   System Requirements
+-   Requirements
 -   Initial Setup
-    -   Setting up a separate Linux account. [SYSADMIN]
-    -   Setting up sendmail aliases. [SYSADMIN]
+    -   Setting up a separate Linux account
+    -   Setting up sendmail aliases
     -   Setting up procmail
     -   Setting up GnuPG
     -   Setting up Perl
@@ -67,7 +67,7 @@ If an article does not qualify for posting, it is to be sent back to the author 
 
 Depending on the nature of the group, acceptable turnaround time can range from a few days to a few weeks. If posts accepted for the group have a long delay before being actually posted, as happens with moderated net magazines, it is a good idea to let the submitter know that the post was accepted, and what the approximate posting date will be.
 
-## System Requirements
+## Requirements
 
 Stump should be able to be installed on any modern Linux, Unix, or BSD-based distribution that.
 The following packages should be available:
@@ -77,7 +77,9 @@ The following packages should be available:
 * Procmail
 * Access to a Usenet server with permission to inject approved messages.
 
-NOTE: At this stage, setting up STUMP is not for the newbie. We hope that this can be simplifies in the future, but at this time it takes some advanced system administration knowledge to get it working.
+A working knowledge of the command line, how to use a package manager, and how to compile programs in C are required. It is also helpful to have root access to the server or at least access to a helpful admin who can perform administrative functions for you.
+
+**NOTE:** At this stage, setting up STUMP is not for the newbie. We hope that this can be simplifies in the future, but at this time it takes some advanced system administration knowledge to get it working.
 
 ## Initial Setup
 
@@ -185,11 +187,7 @@ chmod 700 $HOME.Mail
 
 Make it safe Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it to the needs of your newsgroup. Do it carefully.
 
-**IMPORTANT:** Later you MUST make sure that procmail processes all your
-incoming mail correctly and that all rules are written right. For logs
-of all procmail activity you may look into $HOME/Mail/from logfile. You
-can set `VERBOSE=ON` in the `procmailrc` file if you want to see
-detailed output.
+**IMPORTANT:** Later you MUST make sure that procmail processes all your incoming mail correctly and that all rules are written right. For logs of all procmail activity you may look into $HOME/Mail/from logfile. You can set `VERBOSE=ON` in the `procmailrc` file if you want to see detailed output.
 
 NOTE: file Mail/from is an excellent source of debugging information.
 
@@ -197,73 +195,55 @@ NOTE: file Mail/from is an excellent source of debugging information.
 
 Rename `data.dist` to `data`.
 
-You can (and should) edit some of the files in the data directory. These
-files are good.guys.list, bad.guys.list, bad.words.list. They contain
-Perl's regular expressions for detecting messages from preapproved and
-blacklisted posters, and suspicious words, respectively.
+You can (and should) edit some of the files in the data directory. These files are good.guys.list, bad.guys.list, bad.words.list. They contain Perl's regular expressions for detecting messages from preapproved and blacklisted posters, and suspicious words, respectively.
 
 Edit them and leave them blank (no spaces).
 
-Setting .profile for robomod support
-------------------------------------
+### Setting .profile for robomod support
 
-It is **very important** that you source `modenv` file from the etc
-directory in your .profile (or .login) file. You need to have several
-environment variables, including PATH, to be set correctly in order to
-support robomod properly.
+It is **very important** that you source `modenv` file from the etc directory in your .profile (or .login) file. You need to have several environment variables, including PATH, to be set correctly in order to support robomod properly.
 
 Put this in your .profile or .login file: source $HOME/stump/etc/modenv
 
-Creating ONE PAIR of GnuPG keys.
-------------------------------
+### Creating ONE PAIR of GnuPG keys.
 
 [Skip this part if you do not plan on using PGP Moose].
 
-According to [the specification](spec.html) of the robomod, you have to
-have one GnuPG key - for signing approved articles with PGP Moose
-application.
+According to [the specification](spec.html) of the robomod, you have to have one GnuPG key - for signing approved articles with PGP Moose application.
 
-Pick a passphrase that is not too hard to type and remember. Usage of
-these GnuPG keys is not a very high-security application, so you can
-select 512-bit key sizes. Save this passphrase in file
-`$HOME/.GnuPG-passphrase`
+Pick a passphrase that is not too hard to type and remember. Usage of these GnuPG keys is not a very high-security application, so you can select 512-bit key sizes. Save this passphrase in file `$HOME/.GnuPG-passphrase`
 
-. Make sure that this passphrase is not readable by anyone except the
-robomod user.
+Make sure that this passphrase is not readable by anyone except the robomod user.
 
-Name the key by analogy with the key used for SCRM (see modenv file and
-user names there). Your GnuPG Key must be named like this:
+Name the key by analogy with the key used for SCRM (see modenv file and user names there). Your GnuPG Key must be named like this:
 
+```
     pub   512/ABB554F5 1996/02/26 CSFM Approval Key <csfm-approval-key@yoursite.com>
+```
 
-GnuPG Keys are generated using command GnuPG -kg -u "CSFM Approval Key
-<csfm-approval-key@yoursite.com>"
+GnuPG Keys are generated using the command:
 
-Copy your keyring to a specially designated place for STUMP: cp
-$HOME/.GnuPG/pubring.GnuPG $HOME/stump/data/pubring.GnuPG
+```
+gpg -kg -u "CSFM Approval Key <csfm-approval-key@yoursite.com>"
+```
 
-Compiling C programs in **stump/c** directory
----------------------------------------------
 
-Go to the c directory and type ./compile. That should do it. If it does
-not, figure out on your own. The programs are extremely simple. Perhaps
-you can change the setting of CC to gcc, especially if you use Sun
-computers.
+Copy your keyring to a specially designated place for STUMP:
 
-Creating List for reasons of Rejection and Rejection Messages
--------------------------------------------------------------
+```
+cp $HOME/.GnuPG/pubring.GnuPG $HOME/stump/data/pubring.GnuPG
 
-You should think what broad categories for reasons of rejection you will
-have in your group. Give them simple names. Edit file `etc/reject` and
-edit part that consists of calls to subroutine `addReason`. Customize it
-to your taste. After that, go to directory `etc/messages` and make sure
-that files there have exactly the names that you listed as first
-parameters in calls to `addReason`. Make sure they have comprehensive
-and polite messages corresponding to the broad reasons for rejection
-that you made up.
+```
 
-These messages will be sent to users when their articles are rejected
-for specified reasons. The messages that I supplied are not bad.
+### Compiling C programs in **stump/c** directory
+
+Go to the c directory and type ./compile. That should do it. If it does not, figure out on your own. The programs are extremely simple. Perhaps you can change the setting of CC to gcc, especially if you use Sun computers.
+
+### Creating List for reasons of Rejection and Rejection Messages
+
+You should think what broad categories for reasons of rejection you will have in your group. Give them simple names. Edit file `etc/reject` and edit part that consists of calls to subroutine `addReason`. Customize it to your taste. After that, go to directory `etc/messages` and make sure that files there have exactly the names that you listed as first parameters in calls to `addReason`. Make sure they have comprehensive and polite messages corresponding to the broad reasons for rejection that you made up.
+
+These messages will be sent to users when their articles are rejected for specified reasons. The messages that I supplied are not bad.
 
 Make sure that you keep the following files:
 
@@ -273,95 +253,57 @@ Make sure that you keep the following files:
     of the charter that are checked automatically
 -   signature -- to send back when rejecting for bogus GnuPG signature.
 
-Edit file `rejection-reasons.lst` and put there the reasons that your
-moderators are allowed to choose for rejections. They should have names
-corresponding to the filenames in etc/messages, separated from comments
-by double colon ::.
+Edit file `rejection-reasons.lst` and put there the reasons that your moderators are allowed to choose for rejections. They should have names corresponding to the filenames in etc/messages, separated from comments by double colon ::.
 
 Example:
 
+```
     offtopic::Message is grossly off topic (spam, turks, etc)
     charter::Technical violation of charter (binary, exc. quoting)
     harassing::Message of harassing/insulting/hatemongering content
+```
 
-------------------------------------------------------------------------
+### Testing Your Setup
 
-[Testing Your Setup]{#test}
-===========================
+First of all, your default setup uses my free WebSTUMP service, so that you have a Web based interface for moderation. This means that you install and host STUMP, and you use my installation of WebSTUMP to moderate articles. WebSTUMP is a web based moderation tool, which is nice but a pain to set up. (it requires running setuid code and cgi-bin capability).
 
-First of all, your default setup uses my free WebSTUMP service, so that
-you have a Web based interface for moderation. This means that you
-install and host STUMP, and you use my installation of WebSTUMP to
-moderate articles. WebSTUMP is a web based moderation tool, which is
-nice but a pain to set up. (it requires running setuid code and cgi-bin
-capability).
+To test your newsgroup, first write to `ichudov @ algebra . com`, and ask me to create a newsgroup account for you in webstump. Please tell me your newsgroup name and the approved address (such as csfm-approved@your.site.com). Free WebSTUMP is located at <http://freewebstump.algebra.com/stump-cgi/webstump.cgi>
 
-To test your newsgroup, first write to `ichudov @ algebra . com`, and
-ask me to create a newsgroup account for you in webstump. Please tell me
-your newsgroup name and the approved address (such as
-csfm-approved@your.site.com). Free WebSTUMP is located at
+You should test your setup of the robomoderator very extensively. If the robomod fails when your group goes to production, you will be ashamed. When you are testing, look at file $HOME/Mail/from, which contains all standard error output of your programs. Try to send submissions by email to your moderation address. Do `tail -f $HOME/Mail/from` to see what's going on.
 
-<http://freewebstump.algebra.com/stump-cgi/webstump.cgi>
+## Choosing a "victim" group
 
-You should test your setup of the robomoderator very extensively. If the
-robomod fails when your group goes to production, you will be ashamed.
-When you are testing, look at file $HOME/Mail/from, which contains all
-standard error output of your programs. Try to send submissions by email
-to your moderation address. Do
+I suggest that you use `misc.jobs.misc` for your testing. It is a dead newsgroup infested by spamsters. Nobody will bother and complain about your postings.
 
-tail -f $HOME/Mail/from to see what's going on.
+Edit file `etc/modenv` and put `misc.jobs.misc` in the assignment to NEWSGROUP, for testing purposes.
 
-Choosing a "victim" group
----------------------------
-
-I suggest that you use `misc.jobs.misc` for your testing. It is a dead
-newsgroup infested by spamsters. Nobody will bother and complain about
-your postings.
-
-Edit file `etc/modenv` and put `misc.jobs.misc` in the assignment to
-NEWSGROUP, for testing purposes.
-
-Things to Test
---------------
+### Things to Test
 
 Test at least these conditions:
 
-Testing Schedule
+-   Moderators' list
 
-Test Case
+    Moderators receive all message submitted to the address for their private list.
 
-Test Goal
+-   Ackonwledgments of Receipt
 
-Moderators' list
+    Submitters receive polite and informative messages for every message that they submit (you can turn ack mode off for individuals or even altogether)
 
-Moderators receive all message submitted to the address for thir private
-list.
+-   Distribution of Submissions
 
-Ackonwledgments of Receipt
+    Each message submitted to the robomoderator gets sent to a randomly selected human moderator in an appropriate format.
 
-Submitters receive polite and informative messages for every message
-that they submit (you can turn ack mode off for individuals or even
-altogether)
+-   Approvals work
 
-Distribution of Submissions
+    Messages approved by human moderators actually get posted.
 
-Each message submitted to the robomoderator gets sent to a randomly
-selected human moderator in an appropriate format.
+-   Rejections Work
 
-Approvals work
+    Messages rejected by human moderators do not get posted; submitters receive polite and informative explanations of the reasons of rejection, and pointers to FAQ and Charter of your newsgroup.
 
-Messages approved by human moderators actually get posted.
+-   White List Works
 
-Rejections Work
-
-Messages rejected by human moderators do not get posted; submitters
-receive polite and informative explanations of the reasons of rejection,
-and pointers to FAQ and Charter of your newsgroup.
-
-White List Works
-
-Messages sent by users whose "From: " addresses match regular
-expressions in the good.guys.list file.
+    Messages sent by users whose "From: " addresses match regular expressions in the good.guys.list file.
 
 ## Where to get Help
 
