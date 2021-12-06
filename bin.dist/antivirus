@@ -1,0 +1,81 @@
+#!/usr/bin/env perl
+#
+# Copyright 1996 Igor Chudov
+# Copyright 2021 Rayner Lucas
+#
+# This file is part of STUMP.
+# 
+# STUMP is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# STUMP is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
+#
+# This program replaces all "dangerous" characters in the incoming file
+# to '_' character. Dangerous characters are all characters less than 32
+# (space) and not equal to \n, \r, \t, \f and ^H.
+#
+# It also notices lines > 1024 characters and splits them, adding space
+# character in front of the split line.
+#
+# In ``fascist'' mode (when called with argument -fascist), it is much
+# more restrictive: it permits only newlines, space, TAB, lowercase and
+# uppercase letters, and digits. Everything else is replaced by '_'
+# character.  Fascist mode should be used to filter user input that is
+# to be used in shell scripts. It may prevent users from being able to
+# fool poorly written shell scripts that accept user commands into
+# executing arbitrary programs. Since, unfortunately, it is likely that
+# some of the scripts would be prone to such attacks, using this
+# program is highly recommended BEFORE doing anything with user input.
+#
+# This program should be used to preprocess all incoming mail before
+# feeding to mail processing scripts. It in fact may prove useful
+# against viruses exploiting weaknesses of C programs that overflow
+# buffers, etc.
+
+# Notes (RL 2021-12-06):
+# This is a drop-in Perl replacement for the original antivirus.c.
+#
+# Assumes an 8-bit character set; this may no longer be the Right Thing.
+
+use strict;
+use warnings;
+
+my $MAX_LEN = 1024; # max allowed line size
+
+if (scalar(@ARGV) > 1 || (scalar(@ARGV) == 1 && $ARGV[0] ne "-fascist")) {
+  print "Usage: $0 [-fascist]";
+  exit(1);
+}
+
+# Print string $str, wrapped at $MAX_LEN.
+# Adds a space at the start of each continuation line.
+sub wrap_and_print {
+  my $str = shift;
+  if (length($str) < $MAX_LEN) {
+    print $str;
+  } else {
+    print substr($str, 0, $MAX_LEN);
+    print "\n ";
+    wrap_and_print(substr($str, $MAX_LEN));
+  }
+}
+
+my $line;
+while ($line = <STDIN>) {
+  if ($ARGV[0] && $ARGV[0] eq "-fascist") {
+    $line =~ s/[^A-Za-z0-9 .,+\-\n\r\t\f]/_/g;
+  } else {
+    $line =~ s/[^\x20-\xff\n\r\t\f\b]/_/g;
+  }
+  wrap_and_print($line);
+}
+
+1;

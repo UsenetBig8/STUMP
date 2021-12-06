@@ -1,0 +1,52 @@
+#!/usr/bin/env perl
+#
+# Copyright 1999-2000 Igor Chudov
+# Copyright 2021 Rayner Lucas
+#
+# This file is part of STUMP.
+# 
+# STUMP is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# STUMP is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with STUMP.  If not, see <https://www.gnu.org/licenses/>.
+
+# This program reads an article from standard input and checks if it
+# is a uuencoded binary. If it is, exits with exit code 0, otherwise
+# with exit code 1.
+#
+# A line is considered "binary" if it is over $BIN_LINE_LENGTH characters
+# and either begins with M or contains no tabs or spaces. If there are
+# more than $NUM_BIN_LINES consecutive "binary" lines, the script exits
+# with status 1, otherwise it exits with status 0.
+#
+# This is a drop-in Perl replacement for the original isbinary.c.
+
+use strict;
+use warnings;
+
+my $BIN_LINE_LENGTH = 45;
+my $NUM_BIN_LINES = 10;
+
+# Skip over the header
+while( <STDIN> !~ /^$/ ) {}
+
+my $bin_lines_count = 0;
+my $most_bin_lines = 0;
+while( <STDIN> ) {
+  if (length > $BIN_LINE_LENGTH && (m/^M/ || m/^[^ \t]+$/)) {
+    $bin_lines_count++;
+    $most_bin_lines = $bin_lines_count if ($bin_lines_count > $most_bin_lines);
+  } else {
+    $bin_lines_count = 0;
+  }
+}
+exit(1) if $most_bin_lines < $NUM_BIN_LINES;
+exit(0);
