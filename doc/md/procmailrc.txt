@@ -1,0 +1,135 @@
+# Please check if all the paths in PATH are reachable, remove the ones that
+# are not.
+#
+# NOTE: I use lockfiles extensively (and even excessively) because
+# I do not want to overburden the system. Since I am on a
+# PPP link that is not always on, sometimes large amounts of 
+# submissions come in simultaneously and that may impair
+# performance of the overall system. You do not REALLY need
+# to use these lockfiles otherwise.
+#
+# STUMP USERS: 
+#
+# * Go through this file and replace scrm and
+#   soc.culture.russian.moderated with appropriate text for
+#   your own group.
+#
+# * Please remove recipes related to user "mkagalen". He is not
+#   likely to bother you.
+#
+# * Replace "ichudov" with the address of the robomod supporter.
+#
+# good luck. igor
+#
+###################################################################
+
+PATH=/bin:/usr/bin:/usr/local/bin:$HOME/stump/bin:$HOME/stump/etc
+MAILDIR=$HOME/Mail	# You'd better make sure it exists
+DEFAULT=$MAILDIR/mbox
+# VERBOSE=ON
+LOGFILE=$MAILDIR/from
+LOCKFILE=$HOME/.lockmail
+
+:0 c
+$MAILDIR/allmail
+
+############################################################ Begin Mailbombing
+:0:
+* ^(From|Sender): .*mkagalen@lynx.dac.neu.edu
+* TOscrm-board
+$MAILDIR/bomb
+
+:0:
+* ^(From|Sender): .*mkagalen@lynx.dac.neu.edu
+* TOscrm-mods
+$MAILDIR/bomb
+
+:0
+* ^From: .*mkagalen@lynx.dac.neu.edu
+* ^Subject: .*Spongiform
+$MAILDIR/bomb
+
+:0:
+* From: "The Filter of mkagalen@lynx"
+$MAILDIR/bomb
+
+#
+# This recipe removes duplicates!
+#
+:0 Wh: msgid.lock
+| formail -D 32768 msgid.cache
+
+
+############################################################ End Mailbombing
+
+# Cabal maillist
+:0 
+* ^From .*uu.net
+* ^To: scrm-board
+| modenv mods-message moderators@isc.org ADVICE
+
+:0
+* ^From .*uu.net
+* ^TOmoderators
+| modenv mods-message moderators@isc.org ADVICE
+
+:0
+* ^From .*isc.org
+* ^TOmoderators
+| modenv mods-message moderators@isc.org ADVICE
+
+
+###################################################################### Standard
+
+:0 
+* ^TOscrm-mods
+| modenv mods-message scrm-mods@algebra.com
+
+:0 
+* ^TOscrm-board
+| modenv mods-message scrm-mods@algebra.com
+
+:0
+* ^TOscrm-noack
+| modenv stump.pl processNoack.pl
+
+:0
+* ^TOsoc-culture-russian-moderated
+| modenv stump.pl submission.pl
+
+:0
+* ^TOsoc.culture.russian.moderated
+| modenv stump.pl submission.pl
+
+
+:0
+* ^TOscrm-approved
+| modenv stump.pl acceptFromMod.pl
+
+:0
+* ^TOscrm-rejected
+| modenv stump.pl acceptFromMod.pl
+
+:0 
+* ^TOscrm-admin
+!ichudov
+
+:0
+* ^TOscrm-approval-key
+| modenv send_pgp_key
+
+:0
+* ^Newsgroups: 
+| modenv stump.pl submission.pl
+
+:0 
+* ^FROM_DAEMON
+!ichudov
+
+:0 
+* ^FROM_MAILER
+!ichudov
+
+# Anything that has not been delivered by now is a submission
+:0
+| modenv stump.pl submission.pl
