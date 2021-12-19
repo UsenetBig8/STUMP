@@ -2,25 +2,25 @@
 
 ## Contents
 
--   Understanding Moderation
-    -   What does 'moderated' mean?
-    -   Why do Usenet moderated newsgroups exist ?
-    -   Role of a moderator
--   Requirements
--   Initial Setup
-    -   Setting up a separate Linux account
-    -   Setting up sendmail aliases
-    -   Setting up procmail
-    -   Setting up GnuPG
-    -   Setting up Perl
--   Starting With Robomoderator
+-   [Understanding Moderation](#Understanding Moderation)
+    -   [What is Moderation?](#What is Moderation)
+    -   [Why do Usenet moderated newsgroups exist?](#Why do Usenet moderated newsgroups exist?)
+    -   [Role of a moderator](#Role of a moderator)
+-   [Requirements](#Requirements)
+-   [Initial Setup](#Initial Setup)
+    -   [Setting up a separate Linux account](#Setting up a separate Linux account)
+    -   [Setting up sendmail aliases](#Setting up sendmail aliases)
+    -   [Setting up procmail](#Setting up procmail)
+    -   [Setting up GnuPG](#Setting up GnuPG)
+    -   [Setting up Perl](#Setting up Perl)
+-   [Starting With Robomoderator](#Starting With Robomoderator)
     -   Unpacking Source
-    -   Creating **../etc** directory
+    -   Creating ../etc directory
     -   Setting .profile for robomod support
-    -   Editing Data Files in **../data**
+    -   Editing Data Files in ../data
     -   Creating List for reasons of Rejection and Rejection Messages
     -   Creating GnuPG keys.
-    -   Compiling C programs in **../c** directory
+    -   Compiling C programs in ../c directory
 -   Testing Your Setup
     -   Choosing a victim group
     -   Things to Test
@@ -34,9 +34,9 @@
 -   Upgrading the Robomoderator
 -   Where to Get Help
 
-## Understanding Moderation
+## UnderstandingModeration
 
-### What does 'moderated' mean ?
+### What does 'moderated' mean?
 
 'Moderated' means that all postings to the newsgroup go to a mail address (e.g., news.group@example.com) instead of appearing in the newsgroup directly. The postings are then forwarded via email to a moderator, or group of moderators, or even an automated program, who decides whether to actually inject the article into the newsgroup or to reject it as not meeting guidelines spelled out in the group's charter.
 
@@ -45,7 +45,7 @@ source code. It can also be used to facilitate discussions, to create a forum fo
 
 Moderation should not be used to censor unpopular viewpoints, or those that the moderator simply disagrees with. It is best to have a very clear charter and moderation policy for the newsgroup, so that newsgroup readers and posters can tell which topics are, or are not, appropriate for discussion on the newsgroup.
 
-### Why do Usenet moderated newsgroups exist ?
+### Why do Usenet moderated newsgroups exist?
 
 Groups on the net are moderated for a variety of reasons. All moderation serves the same basic purpose, to filter out inappropriate postings and to deliver timely, on-topic articles. Most moderated groups fall into one of five general categories:
 
