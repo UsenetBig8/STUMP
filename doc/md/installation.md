@@ -2,41 +2,33 @@
 
 ## Contents
 
--   [Understanding Moderation](#Understanding Moderation)
-    -   [What is Moderation?](#What is Moderation)
-    -   [Why do Usenet moderated newsgroups exist?](#Why do Usenet moderated newsgroups exist?)
-    -   [Role of a moderator](#Role of a moderator)
--   [Requirements](#Requirements)
--   [Initial Setup](#Initial Setup)
-    -   [Setting up a separate Linux account](#Setting up a separate Linux account)
-    -   [Setting up sendmail aliases](#Setting up sendmail aliases)
-    -   [Setting up procmail](#Setting up procmail)
-    -   [Setting up GnuPG](#Setting up GnuPG)
-    -   [Setting up Perl](#Setting up Perl)
--   [Starting With Robomoderator](#Starting With Robomoderator)
-    -   Unpacking Source
-    -   Creating ../etc directory
-    -   Setting .profile for robomod support
-    -   Editing Data Files in ../data
-    -   Creating List for reasons of Rejection and Rejection Messages
-    -   Creating GnuPG keys.
-    -   Compiling C programs in ../c directory
--   Testing Your Setup
-    -   Choosing a victim group
-    -   Things to Test
-    -   Testing individual moderators
--   Maintenance of the Robomod
-    -   Maintaining a preapproved list
-    -   Maintaining a blacklist
-    -   Maintaining list of people not needing acknowledgment
-    -   "Vacationing" of moderators, maintenance of private
-        mailing list for moderators.
--   Upgrading the Robomoderator
--   Where to Get Help
+-   [Understanding Moderation](#understandmod)
+    -   [What is Moderation?](#whatismod)
+    -   [Why do Usenet moderated newsgroups exist?](#exist)
+    -   [Role of a moderator](#rolemod)
+-   [Requirements](#requirements)
+-   [Initial Setup](#initialsetup)   
+    -   [Setting up a separate Linux account](#linuxaccount)
+    -   [Setting up sendmail aliases](#aliases)
+    -   [Setting up procmail](#setupprocmail)
+    -   [Setting up GnuPG](#setupgnupg)
+    -   [Setting up Perl](#setupperl)
+-   [Starting With Robomoderator](#startingrobomod)
+    -   [Downloading STUMP](#dlstump)
+    -   [Creating ../etc directory](#createetc)
+    -   [Editing Data Files in ../data](#editdata)
+    -   [Setting .profile for robomod support](#profile)
+    -   [Creating one pair of GnuPG keys](#gnupgpair)
+    -   [Compiling C programs in ../c directory](#compile)
+    -   [Creating a List for reasons of Rejection and Rejection Messages](#rejections)
+-   [Testing Your Setup](#testing)
+    -   [Choosing a victim group](#victim)
+    -   [Things to Test](#tests)
+-   [Where to Get Help](#help)
 
-## UnderstandingModeration
+## Understanding Moderation<a name="understandmod"></a>
 
-### What does 'moderated' mean?
+### What does 'moderated' mean?<a name="whatismod"></a>
 
 'Moderated' means that all postings to the newsgroup go to a mail address (e.g., news.group@example.com) instead of appearing in the newsgroup directly. The postings are then forwarded via email to a moderator, or group of moderators, or even an automated program, who decides whether to actually inject the article into the newsgroup or to reject it as not meeting guidelines spelled out in the group's charter.
 
@@ -45,7 +37,7 @@ source code. It can also be used to facilitate discussions, to create a forum fo
 
 Moderation should not be used to censor unpopular viewpoints, or those that the moderator simply disagrees with. It is best to have a very clear charter and moderation policy for the newsgroup, so that newsgroup readers and posters can tell which topics are, or are not, appropriate for discussion on the newsgroup.
 
-### Why do Usenet moderated newsgroups exist?
+### Why do Usenet moderated newsgroups exist?<a name="exist"></a>
 
 Groups on the net are moderated for a variety of reasons. All moderation serves the same basic purpose, to filter out inappropriate postings and to deliver timely, on-topic articles. Most moderated groups fall into one of five general categories:
 
@@ -59,7 +51,8 @@ Groups on the net are moderated for a variety of reasons. All moderation serves 
 
 5. Groups that are gatewayed into Usenet from an Internet mailing list. These groups are moderated by someone on the Internet side but are shared with the Usenet population. Submissions mailed to the proper addresses, given below, will appear in both the group on Usenet, and the Internet list. This includes some groups in the "inet" distribution such as comp.ai.vision.
 
-### Role of a moderator
+### Role of a moderator<a name="rolemod"></a>
+
 
 Moderating a newsgroup is a volunteer effort but it carries certain responsibilities. The role of a moderator is to review, approve and post articles relevant to a newsgroup according to the group's charter or guidelines.
 
@@ -67,7 +60,7 @@ If an article does not qualify for posting, it is to be sent back to the author 
 
 Depending on the nature of the group, acceptable turnaround time can range from a few days to a few weeks. If posts accepted for the group have a long delay before being actually posted, as happens with moderated net magazines, it is a good idea to let the submitter know that the post was accepted, and what the approximate posting date will be.
 
-## Requirements
+## Requirements<a name="requirements"></a>
 
 Stump should be able to be installed on any modern Linux, Unix, or BSD-based distribution that.
 The following packages should be available:
@@ -81,21 +74,21 @@ A working knowledge of the command line, how to use a package manager, and how t
 
 **NOTE:** At this stage, setting up STUMP is not for the newbie. We hope that this can be simplifies in the future, but at this time it takes some advanced system administration knowledge to get it working.
 
-## Initial Setup
+## Initial Setup<a name="initialsetup"></a>
 
 The steps outlined in this chapter should be done only once at the beginning, when setting up the robomoderator. Suppose that you, are the moderator of the newly created group, and your users like to refer to your group as Comp.Sys.FooBars.Moderated or **csfm**.
 
-### Server Prerequisites
+### Server Prerequisites<a name="prerequisites"></a>
 
 It is recommended to run STUMP on a dedicated server or virtual server like a VPS or a public cloud instance that also a Usenet server. It is possible to run these servers on a home PC if a dynamic DNS service is available but a dedicated server is always best.
 
 A best practice would be to create a dedicated user or alias per newsgroup so mail filtering is easy to work with. Mail filtering applications like procmail best with clear differences like different email addresses.
 
-### Security
+### Security<a name="security"></a>
 
 The Perl scrips that are used in STUMP and WebSTUMP have been proofread and verified for security in the past and built extensive protection against malicious attacks aiming to hack robomoderation account. However, the original code is over 20 years old and may not be completely reliable. Of course, being that this is an open-source application, feel free to contribute to the project or write your own moderation software!
 
-### Setting up sendmail aliases
+### Setting up sendmail aliases<a name="aliases"></a>
 
 Remember that robomoderator performs several functions:
 
@@ -135,19 +128,19 @@ As you can easily see, messages to all of these addresses go to the robomoderato
 Note also, that if you have only one address and a sendmail-based system, and a non-cooperative sysadmin, you can try to get around the requirement to have several sendmail aliases. If addresses like yourname+comment@yoursite.com work, then you can use addresses like "csfm+approved@yoursite.com" instead. Make sure that they do in fact work (it is not guaranteed) and then edit your stump/etc/procmailrc accordingly.
 
 
-### Setting up procmail
+### Setting up procmail<a name="setupprocmail"></a>
 
 You should set up **procmail** - an excellent, free third-party tool for flexible processing of incoming email messages. It works on any Linux. This is a standard package in most Linux distributions. Also, you can follow [this link](http://www.ii.com/internet/robots/) for an excellent introduction (and more!) to procmail.
 
 Look at the [sample .procmailrc file](procmailrc.txt) that is used by soc.culture.russian.moderated.
 
-### Setting up GnuPG
+### Setting up GnuPG<a name="setupgnupg"></a>
 
 **NOTE:** Not all moderators need to set up GnuPG. You only need GnuPG if you plan to use PGP Moose for authentication of approvals. Skip the rest of this section if you are not interested. You can always return to it later. Make sure that the settings in the [stump/etc/modenv](modenv.txt) file are correct. If you plan to NOT use GnuPG, keep GnuPG set to "none" in the "stump/etc/modenv" file.
 
 Set up and familiarize yourself with GnuPG (or GNU Privacy Guard), an excellent third-party encryption and authentication program. GnuPG is a GNU free software version of the PGP application. This is another application that should be with most Linux and Unix distributions and can be installed with your distribution's package manager. The [GnuPG manual](https://gnupg.org/gph/en/manual.html) is available for newbies.
 
-### Setting up Perl
+### Setting up Perl<a name="setupperl"></a>
 
 Most likely you already have a perl interpreter. Simply type at your Linux command prompt:
 
@@ -157,9 +150,9 @@ $ perl -v
 
 If you see some meaningful output, you are fine and you have perl. Otherwise you need to install it. You can install perl and it's libraries using your distribution's package manager.
 
-## Starting with Robomoderator
+## Starting with Robomoderator<a name="startingrobomod"></a>
 
-### Downloading STUMP
+### Downloading STUMP<a name="dlstump"></a>
 
 Currently the best way to download Robomoderator is by cloning the source code from the GNU Savannah git repository:
 
@@ -167,7 +160,7 @@ Currently the best way to download Robomoderator is by cloning the source code f
 $  git clone https://git.savannah.gnu.org/git/stump.git
 ```
 
-### Creating the stump/etc/ directory
+### Creating the stump/etc/ directory<a name="createetc"></a>
 
 In the distribution that you receive, under `stump/`, there is directory `stump/etc.dist/`. Rename it to `stump/etc/`, and you should do the same with `stump/bin.dist/`, `stump/tmp.dist/`, and `stump/data.dist` directories. `stump/etc/` contains files will need to be customized.
 
@@ -191,7 +184,7 @@ Make it safe Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it to 
 
 NOTE: file Mail/from is an excellent source of debugging information.
 
-### Editing Data Files in **..../data**
+### Editing Data Files in **..../data**<a name="editdata"></a>
 
 Rename `data.dist` to `data`.
 
@@ -199,13 +192,13 @@ You can (and should) edit some of the files in the data directory. These files a
 
 Edit them and leave them blank (no spaces).
 
-### Setting .profile for robomod support
+### Setting .profile for robomod support<a name="profile"></a>
 
 It is **very important** that you source `modenv` file from the etc directory in your .profile (or .login) file. You need to have several environment variables, including PATH, to be set correctly in order to support robomod properly.
 
 Put this in your .profile or .login file: source $HOME/stump/etc/modenv
 
-### Creating ONE PAIR of GnuPG keys.
+### Creating ONE PAIR of GnuPG keys.<a name="gnupgpair"></a>
 
 [Skip this part if you do not plan on using PGP Moose].
 
@@ -235,11 +228,11 @@ cp $HOME/.GnuPG/pubring.GnuPG $HOME/stump/data/pubring.GnuPG
 
 ```
 
-### Compiling C programs in **stump/c** directory
+### Compiling C programs in **stump/c** directory<a name="compilec"></a>
 
 Go to the c directory and type ./compile. That should do it. If it does not, figure out on your own. The programs are extremely simple. Perhaps you can change the setting of CC to gcc, especially if you use Sun computers.
 
-### Creating List for reasons of Rejection and Rejection Messages
+### Creating a List for reasons of Rejection and Rejection Messages<a name="rejections"></a>
 
 You should think what broad categories for reasons of rejection you will have in your group. Give them simple names. Edit file `etc/reject` and edit part that consists of calls to subroutine `addReason`. Customize it to your taste. After that, go to directory `etc/messages` and make sure that files there have exactly the names that you listed as first parameters in calls to `addReason`. Make sure they have comprehensive and polite messages corresponding to the broad reasons for rejection that you made up.
 
@@ -263,7 +256,7 @@ Example:
     harassing::Message of harassing/insulting/hatemongering content
 ```
 
-### Testing Your Setup
+### Testing Your Setup<a name="testing"></a>
 
 First of all, your default setup uses my free WebSTUMP service, so that you have a Web based interface for moderation. This means that you install and host STUMP, and you use my installation of WebSTUMP to moderate articles. WebSTUMP is a web based moderation tool, which is nice but a pain to set up. (it requires running setuid code and cgi-bin capability).
 
@@ -271,13 +264,13 @@ To test your newsgroup, first write to `ichudov @ algebra . com`, and ask me to 
 
 You should test your setup of the robomoderator very extensively. If the robomod fails when your group goes to production, you will be ashamed. When you are testing, look at file $HOME/Mail/from, which contains all standard error output of your programs. Try to send submissions by email to your moderation address. Do `tail -f $HOME/Mail/from` to see what's going on.
 
-## Choosing a "victim" group
+## Choosing a "victim" group<a name="victim"></a>
 
 I suggest that you use `misc.jobs.misc` for your testing. It is a dead newsgroup infested by spamsters. Nobody will bother and complain about your postings.
 
 Edit file `etc/modenv` and put `misc.jobs.misc` in the assignment to NEWSGROUP, for testing purposes.
 
-### Things to Test
+### Things to Test<a name="tests"></a>
 
 Test at least these conditions:
 
@@ -305,7 +298,7 @@ Test at least these conditions:
 
     Messages sent by users whose "From: " addresses match regular expressions in the good.guys.list file.
 
-## Where to get Help
+## Where to get Help<a name="help"></a>
 
 First of all, please take your time and be prepared to be patient. Since configurations of local systems and newsgroups are different, setting them up takes some time. There are two ways you can get help. The first one is free, the second is not. If you know something about Linux, you probably can try to go the first route. If you are not a Linux person, second route may be the way to go.
 
