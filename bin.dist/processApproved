@@ -50,7 +50,7 @@ post() {
     # I do grep above because a lot of users inserts empty
     # lines in the added headers.
 
-    echo Date: "$(date "+%a, %e %b %Y %H:%M:%S CST")"
+    echo Date: "$(date "+%a, %e %b %Y %H:%M:%S %z")"
     formail -b -f -a "Newsgroups: $NEWSGROUP"		\
 	    -I Path:					\
             -I X-Moderate-For:                          \
@@ -63,6 +63,12 @@ post() {
             -I Lines:                                   \
             -I Cc:                                      \
 	    -I To: -I Status:                           \
+	    -i "NNTP-Posting-Host:"                     \
+	    -i "NNTP-Posting-Date:"                     \
+	    -I "Disposition-Notification-To:"           \
+	    -R "Injection-Info:" "X-Original-Injection-Info:" \
+	    -R "Injection-Date:" "X-Original-Injection-Date:" \
+	    -I "Xref:"                                  \
 	    < "$TMPFILE"
 
     if [ -f "$MNG_ROOT"/etc/added-footer ] ; then
