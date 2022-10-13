@@ -229,21 +229,6 @@ WHITELIST_MUST_SIGN=NO; export WHITELIST_MUST_SIGN
 RNEWS="sendmail -f devnull@stump.algebra.com news-gateway@stump.algebra.com"
 export RNEWS
 
-# ATTENTION!!!
-# MORE ABOUT RNEWS/INEWS: unfortunately, these programs differ on many
-# systems. Some of the BSD-derived systems have "broken" inews and rnews
-# that does not like another program "hostname".
-#
-# If you see error messages about "hostname" in ~/Mail/from, you should 
-# either disregard them, or use the "hostname" shell script provided in 
-# stump/etc. Do the following: 
-#
-# cd $HOME/stump/etc
-# mv hostname.REPLACEMENT hostname
-#
-# Edit "hostname" and set your host name and fully qualified hostname.
-#
-
 ############################################################ Internal vars
 #
 # Do NOT change this section
