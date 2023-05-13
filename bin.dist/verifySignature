@@ -51,7 +51,7 @@ DoPGP() {
   stump-pgp -f +batchmode=on +pubring="$MNG_ROOT"/data/pubring.pgp < "$TMPFILE" 2>&1 > /dev/null
 }
 
-USERID="$(DoPGP | grep -e "^$GOODSIG" | sed \"s/^$GOODSIG//\" | sed 's/"\.$//')"
+USERID="$(DoPGP | grep -e "^$GOODSIG" | sed "s/^$GOODSIG//" | sed 's/"\.$//')"
 
 rm "$TMPFILE"
 
