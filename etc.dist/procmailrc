@@ -32,9 +32,6 @@
 #   soc.culture.russian.moderated with appropriate text for
 #   your own group.
 #
-# * Please remove recipes related to user "mkagalen". He is not
-#   likely to bother you.
-#
 # * Replace "ichudov" with the address of the robomod supporter.
 #
 # good luck. igor
@@ -51,34 +48,6 @@ LOCKFILE=$HOME/.lockmail
 :0 c
 $MAILDIR/allmail
 
-############################################################ Begin Mailbombing
-:0:
-* ^(From|Sender): .*mkagalen@lynx.dac.neu.edu
-* TOscrm-board
-$MAILDIR/bomb
-
-:0:
-* ^(From|Sender): .*mkagalen@lynx.dac.neu.edu
-* TOscrm-mods
-$MAILDIR/bomb
-
-:0
-* ^From: .*mkagalen@lynx.dac.neu.edu
-* ^Subject: .*Spongiform
-$MAILDIR/bomb
-
-:0:
-* From: "The Filter of mkagalen@lynx"
-$MAILDIR/bomb
-
-#
-# This recipe removes duplicates!
-#
-:0 Wh: msgid.lock
-| formail -D 32768 msgid.cache
-
-
-############################################################ End Mailbombing
 
 # Cabal maillist
 :0 
