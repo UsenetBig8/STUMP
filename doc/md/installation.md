@@ -128,7 +128,7 @@ Note also that if you have only one address and a sendmail-based system, and a n
 
 You should set up **procmail** - an excellent, free third-party tool for flexible processing of incoming email messages. It works on any Linux. This is a standard package in most Linux distributions. Also, you can follow [this link](http://www.ii.com/internet/robots/) for an excellent introduction (and more!) to procmail.
 
-Look at the [sample .procmailrc file](procmailrc.txt) that is used by soc.culture.russian.moderated.
+Look at the [sample .procmailrc file](../procmailrc.txt) that is used by soc.culture.russian.moderated.
 
 ### Setting up GnuPG<a name="setupgnupg"></a>
 
@@ -177,7 +177,7 @@ mkdir $HOME/Mail
 chmod 700 $HOME.Mail
 ```
 
-Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it to the needs of your newsgroup. Do it carefully.
+Edit your $HOME/stump/procmailrc to tailor it to the needs of your newsgroup. Do it carefully.
 
 **IMPORTANT:** Later you MUST make sure that procmail processes all your incoming mail correctly and that all rules are written right. For logs of all procmail activity you may look into $HOME/Mail/from logfile. You can set `VERBOSE=ON` in the `procmailrc` file if you want to see detailed output.
 
