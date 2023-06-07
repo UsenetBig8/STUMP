@@ -19,10 +19,9 @@
     -   [Editing Data Files in ../data](#editdata)
     -   [Setting .profile for robomod support](#profile)
     -   [Creating one pair of GnuPG keys](#gnupgpair)
-    -   [Compiling C programs in ../c directory](#compile)
     -   [Creating a List for reasons of Rejection and Rejection Messages](#rejections)
 -   [Testing Your Setup](#testing)
-    -   [Choosing a victim group](#victim)
+    -   [Choosing a test group](#testgroup)
     -   [Things to Test](#tests)
 -   [Where to Get Help](#help)
 
@@ -30,10 +29,9 @@
 
 ### What does 'moderated' mean?<a name="whatismod"></a>
 
-'Moderated' means that all postings to the newsgroup go to a mail address (e.g., news.group@example.com) instead of appearing in the newsgroup directly. The postings are then forwarded via email to a moderator, or group of moderators, or even an automated program, who decides whether to actually inject the article into the newsgroup or to reject it as not meeting guidelines spelled out in the group's charter.
+'Moderated' means that all postings to the newsgroup go to an email address (e.g., news.group@example.com) instead of appearing in the newsgroup directly. The postings are then forwarded via email to a moderator, or group of moderators, or even an automated program, who decides whether to actually inject the article into the newsgroup or to reject it as not meeting guidelines spelled out in the group's charter.
 
-The main purpose of newsgroup moderation is to prevent inappropriate posts to the newsgroup. For example, moderation can prevent discussion or requests for software from appearing in groups dedicated to posting
-source code. It can also be used to facilitate discussions, to create a forum for announcements, to prevent repeated posts of the same information, or to cut off endless uninformative arguments. Some groups, e.g., rec.humor.funny and some source groups, also use it to control the traffic volume.
+The main purpose of newsgroup moderation is to prevent inappropriate posts to the newsgroup. For example, moderation can prevent discussion or requests for software from appearing in groups dedicated to posting source code. It can also be used to facilitate discussions, to create a forum for announcements, to prevent repeated posts of the same information, or to cut off endless uninformative arguments. Some groups, e.g., rec.humor.funny and some source groups, also use it to control the traffic volume.
 
 Moderation should not be used to censor unpopular viewpoints, or those that the moderator simply disagrees with. It is best to have a very clear charter and moderation policy for the newsgroup, so that newsgroup readers and posters can tell which topics are, or are not, appropriate for discussion on the newsgroup.
 
@@ -53,7 +51,6 @@ Groups on the net are moderated for a variety of reasons. All moderation serves 
 
 ### Role of a moderator<a name="rolemod"></a>
 
-
 Moderating a newsgroup is a volunteer effort but it carries certain responsibilities. The role of a moderator is to review, approve and post articles relevant to a newsgroup according to the group's charter or guidelines.
 
 If an article does not qualify for posting, it is to be sent back to the author with an explanation of why it is not suitable for posting.
@@ -66,31 +63,31 @@ Stump should be able to be installed on any modern Linux, Unix, or BSD-based dis
 The following packages should be available:
 
 * Perl
-* A working smtp server. sendmail is used in this guide.
+* A working SMTP server. sendmail is used in this guide.
 * Procmail
 * Access to a Usenet server with permission to inject approved messages.
 
-A working knowledge of the command line, how to use a package manager, and how to compile programs in C are required. It is also helpful to have root access to the server or at least access to a helpful admin who can perform administrative functions for you.
+A working knowledge of the command line and how to use a package manager are required. It is also helpful to have root access to the server or at least access to a helpful admin who can perform administrative functions for you.
 
-**NOTE:** At this stage, setting up STUMP is not for the newbie. We hope that this can be simplifies in the future, but at this time it takes some advanced system administration knowledge to get it working.
+**NOTE:** At this stage, setting up STUMP is not for the newbie. We hope that this can be simplified in the future, but at this time it takes some advanced system administration knowledge to get it working.
 
 ## Initial Setup<a name="initialsetup"></a>
 
-The steps outlined in this chapter should be done only once at the beginning, when setting up the robomoderator. Suppose that you, are the moderator of the newly created group, and your users like to refer to your group as Comp.Sys.FooBars.Moderated or **csfm**.
+The steps outlined in this chapter should be done only once at the beginning, when setting up the robomoderator. Suppose that you are the moderator of the newly created group, and your users like to refer to your group as comp.sys.foobars.moderated or **csfm**.
 
 ### Server Prerequisites<a name="prerequisites"></a>
 
-It is recommended to run STUMP on a dedicated server or virtual server like a VPS or a public cloud instance that also a Usenet server. It is possible to run these servers on a home PC if a dynamic DNS service is available but a dedicated server is always best.
+It is recommended to run STUMP on a dedicated server or virtual server like a VPS or a public cloud instance that also runs a Usenet server. It is possible to run these servers on a home PC if a dynamic DNS service is available but a dedicated server is always best.
 
-A best practice would be to create a dedicated user or alias per newsgroup so mail filtering is easy to work with. Mail filtering applications like procmail best with clear differences like different email addresses.
+A best practice would be to create a dedicated user or alias per newsgroup so mail filtering is easy to work with. Mail filtering applications like procmail work best with clear differences like different email addresses.
 
 ### Security<a name="security"></a>
 
-The Perl scrips that are used in STUMP and WebSTUMP have been proofread and verified for security in the past and built extensive protection against malicious attacks aiming to hack robomoderation account. However, the original code is over 20 years old and may not be completely reliable. Of course, being that this is an open-source application, feel free to contribute to the project or write your own moderation software!
+The Perl scripts that are used in STUMP and WebSTUMP have been proofread and verified for security in the past and built extensive protection against malicious attacks aiming to hack robomoderation account. However, the original code is over 20 years old and may not be completely reliable. Of course, being that this is an open-source application, feel free to contribute to the project or write your own moderation software!
 
 ### Setting up sendmail aliases<a name="aliases"></a>
 
-Remember that robomoderator performs several functions:
+Remember that the robomoderator performs several functions:
 
 - Accepts and checks incoming submissions
 - Accepts approvals and rejections by human moderators
@@ -99,7 +96,7 @@ Remember that robomoderator performs several functions:
 
 For each such purpose, a separate email address must be established. Note the distinction between an email address and a user id: several email addresses may correspond to one user ID. These addresses should normally be *sendmail aliases*. These aliases are normally defined in file `/etc/aliases`.
 
-Example aliases file for Comp.Sys.FooBars.Moderated:
+Example aliases file for comp.sys.foobars.moderated:
 
 ```
 # submissions
@@ -123,10 +120,9 @@ comp-sys-foobars-moderated: csfm-submit
 comp.sys.foobars.moderated: csfm-submit
 ```
 
-As you can easily see, messages to all of these addresses go to the robomoderator's address.
+As you can see, messages to all of these addresses go to the robomoderator's address.
 
-Note also, that if you have only one address and a sendmail-based system, and a non-cooperative sysadmin, you can try to get around the requirement to have several sendmail aliases. If addresses like yourname+comment@yoursite.com work, then you can use addresses like "csfm+approved@yoursite.com" instead. Make sure that they do in fact work (it is not guaranteed) and then edit your stump/etc/procmailrc accordingly.
-
+Note also that if you have only one address and a sendmail-based system, and a non-cooperative sysadmin, you can try to get around the requirement to have several sendmail aliases. If addresses like yourname+comment@yoursite.com work, then you can use addresses like "csfm+approved@yoursite.com" instead. Make sure that they do in fact work (it is not guaranteed) and then edit your stump/etc/procmailrc accordingly.
 
 ### Setting up procmail<a name="setupprocmail"></a>
 
@@ -138,17 +134,17 @@ Look at the [sample .procmailrc file](procmailrc.txt) that is used by soc.cultur
 
 **NOTE:** Not all moderators need to set up GnuPG. You only need GnuPG if you plan to use PGP Moose for authentication of approvals. Skip the rest of this section if you are not interested. You can always return to it later. Make sure that the settings in the [stump/etc/modenv](modenv.txt) file are correct. If you plan to NOT use GnuPG, keep GnuPG set to "none" in the "stump/etc/modenv" file.
 
-Set up and familiarize yourself with GnuPG (or GNU Privacy Guard), an excellent third-party encryption and authentication program. GnuPG is a GNU free software version of the PGP application. This is another application that should be with most Linux and Unix distributions and can be installed with your distribution's package manager. The [GnuPG manual](https://gnupg.org/gph/en/manual.html) is available for newbies.
+Set up and familiarize yourself with GnuPG (or GNU Privacy Guard), an excellent third-party encryption and authentication program. GnuPG is a GNU free software version of the PGP application. This is another application that should be included with most Linux and Unix distributions and can be installed with your distribution's package manager. The [GnuPG manual](https://gnupg.org/gph/en/manual.html) is available for newbies.
 
 ### Setting up Perl<a name="setupperl"></a>
 
-Most likely you already have a perl interpreter. Simply type at your Linux command prompt:
+Most likely you already have a Perl interpreter. Simply type at your Linux command prompt:
 
 ```
 $ perl -v
 ```
 
-If you see some meaningful output, you are fine and you have perl. Otherwise you need to install it. You can install perl and it's libraries using your distribution's package manager.
+If you see some meaningful output, you are fine and you have Perl. Otherwise you need to install it. You can install Perl and its libraries using your distribution's package manager.
 
 ## Starting with Robomoderator<a name="startingrobomod"></a>
 
@@ -162,23 +158,26 @@ $  git clone https://git.savannah.gnu.org/git/stump.git
 
 ### Creating the stump/etc/ directory<a name="createetc"></a>
 
-In the distribution that you receive, under `stump/`, there is directory `stump/etc.dist/`. Rename it to `stump/etc/`, and you should do the same with `stump/bin.dist/`, `stump/tmp.dist/`, and `stump/data.dist` directories. `stump/etc/` contains files will need to be customized.
+In the distribution that you receive, under `stump/`, there is the directory `stump/etc.dist/`. Rename it to `stump/etc/`, and you should do the same with `stump/bin.dist/`, `stump/tmp.dist/`, and `stump/data.dist` directories. `stump/etc/` contains files that will need to be customized.
 
-The files in the `stump/etc/` directory, and edit them carefully.
+Read the files in the `stump/etc/` directory, and edit them carefully.
 
-Most of them are self explanatory and contain several comments. You should begin with editing the `modenv.txt`.
+Most of them are self explanatory and contain several comments. You should begin with editing `modenv.txt`.
 
-Create a symbolic links for procmail:
+Create a symbolic link for procmail:
 
 ```
-$ /bin/ln -s $HOME/stump/etc/procmailrc $HOME/.procmailrc
-$ mkdir $HOME/Mail
+/bin/ln -s $HOME/stump/etc/procmailrc $HOME/.procmailrc
 ```
 
-Creates directory for mail
+Create a directory for mail and set safe permissions:
+
+```
+mkdir $HOME/Mail
 chmod 700 $HOME.Mail
+```
 
-Make it safe Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it to the needs of your newsgroup. Do it carefully.
+Edit your [$HOME/stump/procmailrc](procmailrc.txt) to tailor it to the needs of your newsgroup. Do it carefully.
 
 **IMPORTANT:** Later you MUST make sure that procmail processes all your incoming mail correctly and that all rules are written right. For logs of all procmail activity you may look into $HOME/Mail/from logfile. You can set `VERBOSE=ON` in the `procmailrc` file if you want to see detailed output.
 
@@ -228,47 +227,38 @@ cp $HOME/.GnuPG/pubring.GnuPG $HOME/stump/data/pubring.GnuPG
 
 ```
 
-### Compiling C programs in **stump/c** directory<a name="compilec"></a>
-
-Go to the c directory and type ./compile. That should do it. If it does not, figure out on your own. The programs are extremely simple. Perhaps you can change the setting of CC to gcc, especially if you use Sun computers.
-
 ### Creating a List for reasons of Rejection and Rejection Messages<a name="rejections"></a>
 
-You should think what broad categories for reasons of rejection you will have in your group. Give them simple names. Edit file `etc/reject` and edit part that consists of calls to subroutine `addReason`. Customize it to your taste. After that, go to directory `etc/messages` and make sure that files there have exactly the names that you listed as first parameters in calls to `addReason`. Make sure they have comprehensive and polite messages corresponding to the broad reasons for rejection that you made up.
+You should think what broad categories for reasons of rejection you will have in your group. Give them simple names. Edit file `etc/reject` and edit the part that consists of calls to subroutine `addReason`. Customize it to your taste. After that, go to directory `etc/messages` and make sure that the files there have exactly the names that you listed as first parameters in calls to `addReason`. Make sure they have comprehensive and polite messages corresponding to the broad reasons for rejection that you made up.
 
 These messages will be sent to users when their articles are rejected for specified reasons. The messages that I supplied are not bad.
 
 Make sure that you keep the following files:
 
 -   abuse -- to send back when rejecting banned users
--   crosspost -- to send back when rejecting for megacrossposting
--   charter -- to send back when rejecting for violating requirements
-    of the charter that are checked automatically
+-   crosspost -- to send back when rejecting for excessive crossposting
+-   charter -- to send back when rejecting for violating requirements of the charter that are checked automatically
 -   signature -- to send back when rejecting for bogus GnuPG signature.
 
-Edit file `rejection-reasons.lst` and put there the reasons that your moderators are allowed to choose for rejections. They should have names corresponding to the filenames in etc/messages, separated from comments by double colon ::.
+Edit the file `rejection-reasons.lst` and put there the reasons that your moderators are allowed to choose for rejections. They should have names corresponding to the filenames in etc/messages, separated from comments by double colon ::.
 
 Example:
 
 ```
-    offtopic::Message is grossly off topic (spam, turks, etc)
-    charter::Technical violation of charter (binary, exc. quoting)
+    offtopic::Message is grossly off topic (spam, etc)
+    charter::Technical violation of charter (binary, excessive quoting)
     harassing::Message of harassing/insulting/hatemongering content
 ```
 
 ### Testing Your Setup<a name="testing"></a>
 
-First of all, your default setup uses my free WebSTUMP service, so that you have a Web based interface for moderation. This means that you install and host STUMP, and you use my installation of WebSTUMP to moderate articles. WebSTUMP is a web based moderation tool, which is nice but a pain to set up. (it requires running setuid code and cgi-bin capability).
-
-To test your newsgroup, first write to `ichudov @ algebra . com`, and ask me to create a newsgroup account for you in webstump. Please tell me your newsgroup name and the approved address (such as csfm-approved@your.site.com). Free WebSTUMP is located at <http://freewebstump.algebra.com/stump-cgi/webstump.cgi>
-
 You should test your setup of the robomoderator very extensively. If the robomod fails when your group goes to production, you will be ashamed. When you are testing, look at file $HOME/Mail/from, which contains all standard error output of your programs. Try to send submissions by email to your moderation address. Do `tail -f $HOME/Mail/from` to see what's going on.
 
-## Choosing a "victim" group<a name="victim"></a>
+## Choosing a test group<a name="testgroup"></a>
 
-I suggest that you use `misc.jobs.misc` for your testing. It is a dead newsgroup infested by spamsters. Nobody will bother and complain about your postings.
+We recommend that you use a test newsgroup such as `misc.test` or `alt.test` for your testing. These groups exist to allow people to test that their Usenet software is working correctly, so your posts will not interfere with any real discussions.
 
-Edit file `etc/modenv` and put `misc.jobs.misc` in the assignment to NEWSGROUP, for testing purposes.
+Edit file `etc/modenv` and put `misc.test` in the assignment to NEWSGROUP, for testing purposes.
 
 ### Things to Test<a name="tests"></a>
 
@@ -292,7 +282,7 @@ Test at least these conditions:
 
 -   Rejections Work
 
-    Messages rejected by human moderators do not get posted; submitters receive polite and informative explanations of the reasons of rejection, and pointers to FAQ and Charter of your newsgroup.
+    Messages rejected by human moderators do not get posted; submitters receive polite and informative explanations of the reasons of rejection, and pointers to the FAQ and Charter of your newsgroup.
 
 -   White List Works
 
@@ -300,7 +290,9 @@ Test at least these conditions:
 
 ## Where to get Help<a name="help"></a>
 
-First of all, please take your time and be prepared to be patient. Since configurations of local systems and newsgroups are different, setting them up takes some time. There are two ways you can get help. The first one is free, the second is not. If you know something about Linux, you probably can try to go the first route. If you are not a Linux person, second route may be the way to go.
+First of all, please take your time and be prepared to be patient. It may not be possible for someone to answer your question immediately.
+
+There are two places you can get help:
 
 -   STUMP-users mailing list.
 
