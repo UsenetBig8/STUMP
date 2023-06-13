@@ -43,8 +43,7 @@ Useful Links
     Usenet moderation.
 -   [So You Want to Create an alt Newsgroup, by Dave
     Barr.](https://web.archive.org/web/20051211191240/http://www.visi.com/~barr/alt-creation-guide.html)
--   [Sample Newsgroup Proposal for an alt.\* newsgroup \-- Cut and
-    Paste](../proposal.txt)
+-   [Sample Newsgroup Proposal for an alt.\* newsgroup](../proposal.txt)
 
 Charters
 --------
@@ -106,14 +105,14 @@ Rmgroups
 Rmgroup is a technical term, an abbreviation of \"remove group\". In the
 original USENET design, RMGROUPS were used to delete badly configured
 newsgroups. Due to widespread abuse and lack of built in authentication,
-Rmgroup messages are no longer effective and are widely ignored by all
+rmgroup messages are no longer effective and are widely ignored by all
 but most misconfigured news sites.
 
 In the `alt.\*` hierarchy, anyone can issue a rmgroup message, just as
 anyone can create a newsgroup.
 
 There are a few self-approinted guardians of propriety, who watch all
-newsgroup messages and rmgroup those newly created newsgroups that they
+newgroup messages and rmgroup those newly created newsgroups that they
 do not like. But, as noted above, this will have no real effect. If you
 see a rmgroup message that deletes your newsgroup, simply ignore it.
 
