@@ -1,7 +1,13 @@
-Soc.Culture.Russian.Moderated Robomoderator Project ( 6-Mar-1996)
+# STUMP Specification
 
-Soc.Culture.Russian.Moderated Robomoderator Project
-===================================================
+This is a historical document that represents the original specification
+and design documentation for STUMP. It may still be of use to developers;
+however, it should not be taken as a definitive guide to STUMP's current
+operation and features. (STUMP development team, June 2023)
+
+
+Soc.Culture.Russian.Moderated Robomoderator Project ( 6-Mar-1996)
+=================================================================
 
 This document describes in details how the robomoderator for a new group
 `soc.culture.russian.moderated` works.
