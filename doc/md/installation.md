@@ -59,7 +59,7 @@ Depending on the nature of the group, acceptable turnaround time can range from 
 
 ## Requirements<a name="requirements"></a>
 
-Stump should be able to be installed on any modern Linux, Unix, or BSD-based distribution that.
+STUMP should be able to be installed on any modern Linux, Unix, or BSD-based distribution.
 The following packages should be available:
 
 * Perl
