@@ -63,6 +63,7 @@ STUMP should be able to be installed on any modern Linux, Unix, or BSD-based dis
 The following packages should be available:
 
 * Perl
+* The `Email::Address` Perl module, version 1.910 or later.
 * A working SMTP server. sendmail is used in this guide.
 * Procmail
 * Access to a Usenet server with permission to inject approved messages.
